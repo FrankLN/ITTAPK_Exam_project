@@ -7,5 +7,6 @@
 class Plant : public Actor
 {
 public:
+	Plant(float mass);
 	void show();
 };

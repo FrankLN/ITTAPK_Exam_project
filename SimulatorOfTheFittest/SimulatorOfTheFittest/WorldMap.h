@@ -3,14 +3,29 @@
 
 #include <iostream>
 
-template<typename T, size_t x, size_t y = x>
+template<typename T, size_t X, size_t Y = X>
 class WorldMap
 {
 public:
-	WorldMap<T, x, y>() : data_(T[x][y])
+	WorldMap<T, X, Y>(){}
 
+	void printAll()
+	{
+		for (int i = 0; i < X; i++)
+		{
+			for (int j = 0; j < Y; j++)
+			{
+				std::cout << "data_[" << i << "][" << j << "] = " << data_[i][j] << std::endl;
+			}
+		}
+	}
+
+	T getDataItem(int x, int y)
+	{
+		return data_[x][y];
+	}
 private:
-	T[x][y] data_;
+	T data_[X][Y];
 };
 
 #endif

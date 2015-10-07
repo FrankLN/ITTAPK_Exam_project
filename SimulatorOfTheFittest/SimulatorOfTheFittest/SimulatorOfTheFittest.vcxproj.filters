@@ -56,5 +56,8 @@
     <ClInclude Include="WorldMap.h">
       <Filter>Header Files\WorldMap</Filter>
     </ClInclude>
+    <ClInclude Include="Area.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

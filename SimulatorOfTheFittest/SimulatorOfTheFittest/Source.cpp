@@ -5,8 +5,17 @@
 #include <iostream>
 #include <vector>
 #include "WorldMap.h"
+#include "Area.h"
 
 void main()
 {
-	WorldMap<int, 10, 8> wm = WorldMap<int, 10, 8>();
+	Actor * actor = new Carnivore(42);
+	actor->show();
+	actor = new Herbivore(42);
+	actor->show();
+	actor = new Plant(42);
+	actor->show();
+
+	Carnivore actors(42);
+	actors.show();
 }
