@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{6ab6ea02-b9f3-426c-a46c-66690752254d}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{c662d633-7386-4618-ad7c-9d7439125cd9}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{a928cd5a-b51d-4a51-9bd3-8bf5c18ab9f6}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Make files">
+      <UniqueIdentifier>{2f702af8-932f-4ea6-9d66-6be189cf718e}</UniqueIdentifier>
+      <Extensions>*.mak</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Plant.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Carnivore.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Herbivore.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Area.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Makefile" />
+    <None Include="debug.mak">
+      <Filter>Make files</Filter>
+    </None>
+    <None Include="release.mak">
+      <Filter>Make files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plant.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animal.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Carnivore.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Herbivore.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorList.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Area.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

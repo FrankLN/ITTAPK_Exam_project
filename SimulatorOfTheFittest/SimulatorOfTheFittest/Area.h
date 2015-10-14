@@ -7,7 +7,7 @@
 #include <time.h>
 #include <algorithm>
 
-#include <Objbase.h>
+//#include <Objbase>
 
 #include "Actor.h"
 #include "Plant.h"

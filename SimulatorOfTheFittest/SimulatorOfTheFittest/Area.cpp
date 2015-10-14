@@ -2,11 +2,14 @@
 
 Area::Area()
 {
+	/*
 	GUID gidReference;
 	HRESULT hCreateGuid = CoCreateGuid(&gidReference);
 
 	seed_ = gidReference.Data1;
-
+	*/
+	seed_ = 1;
+	
 	srand(seed_);
 
 	switch (rand() % 4)
@@ -73,8 +76,9 @@ void Area::printAllActors()
 
 void Area::act()
 {
+	/*
 	int i = 0;
-	for each (Actor* actor in actors_)
+	for_each (Actor* actor in actors_)
 	{
 		if (actor->getName() == "Plant")
 		{
@@ -93,4 +97,6 @@ void Area::act()
 		}
 		i++;
 	}
+	*/
+	std::cout << "ACT!" << std::endl;
 }
