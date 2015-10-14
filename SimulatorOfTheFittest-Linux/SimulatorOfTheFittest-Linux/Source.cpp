@@ -10,11 +10,6 @@
 int main()
 {
 	WorldMap<Area, 1> wm = WorldMap<Area, 1>();
-
-	wm.printAll();	
-	wm.actAll();
-	
-	wm.actAll();
 	
 	return 0;
 }

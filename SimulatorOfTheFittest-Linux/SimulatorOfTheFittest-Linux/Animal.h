@@ -21,9 +21,12 @@ public:
 	{
 		hasEaten_ = c;
 	}
-	virtual void getHungry()
+	virtual bool increaseHunger()
 	{
 		hungerBar_++;
+		if (hungerBar_ >= 10)
+			return true;
+		return false;
 	}
 };
 
