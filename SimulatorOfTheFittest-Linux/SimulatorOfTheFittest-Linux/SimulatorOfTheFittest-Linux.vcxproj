@@ -43,7 +43,7 @@
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
     <NMakeOutput>$(ProjectDir)SimulatorOfTheFittest-Linux-Debug.vgdbsettings</NMakeOutput>
-    <IncludePath />
+    <IncludePath>C:\Program Files\boost\boost_1_55_0</IncludePath>
     <ReferencePath />
     <LibraryPath />
     <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
@@ -67,6 +67,7 @@
     <ClCompile Include="Carnivore.cpp" />
     <ClCompile Include="Herbivore.cpp" />
     <ClCompile Include="Plant.cpp" />
+    <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
