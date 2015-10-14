@@ -49,15 +49,15 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	while (rand() % 100 < 70)
+	while (rand() % 100 < 20)
 	{
 		actors_.push_back(new Plant(rand() % 100));
 	}
-	while (rand() % 100 < 70)
+	while (rand() % 100 < 20)
 	{
 		actors_.push_back(new Carnivore(950 + rand() % 100));
 	}
-	while (rand() % 100 < 70)
+	while (rand() % 100 < 20)
 	{
 		actors_.push_back(new Herbivore(950 + rand() % 100));
 	}
@@ -73,6 +73,7 @@ void Area::printAllActors()
 
 void Area::act()
 {	
+	std::cout << "<<<Before act>>>" << std::endl;
 	printAllActors();
 	
 	size_t s = actors_.size();
@@ -123,9 +124,22 @@ void Area::act()
 		{
 			Animal* temp  = dynamic_cast<Animal*>(actors_[i]);
 			temp->setHasEaten(false);
-			temp->getHungry();
+			if (temp->increaseHunger())
+			{
+				actors_.erase(actors_.begin() + i);
+				s = actors_.size();
+				i--;
+			}
+				
 		}
 	}
 	
+	
+	std::cout << "<<<After act>>>" << std::endl;
+	printAllActors();
+	
+	
+	std::cout << "<<<New generates>>>" << std::endl;
+	generateRandomActors();
 	printAllActors();
 }
