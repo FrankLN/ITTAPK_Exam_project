@@ -6,10 +6,17 @@
 #include <vector>
 #include "WorldMap.h"
 #include "Area.h"
+#include "Simulation.cpp"
 
 int main()
 {
 	WorldMap<Area, 1> wm = WorldMap<Area, 1>();
+	
+	Simulator mySimulator;
+	mySimulator.initiate();
+	
+	
+	
 	
 	return 0;
 }

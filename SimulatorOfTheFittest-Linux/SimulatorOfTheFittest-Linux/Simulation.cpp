@@ -5,6 +5,8 @@
 #include <boost/mpl/list.hpp>
 #include "Animal.h"
 #include "Carnivore.h"
+#include "WorldMap.h"
+#include "Area.h"
 
 namespace sc = boost::statechart;
 namespace mpl = boost::mpl;
@@ -22,6 +24,7 @@ struct Finished;
 struct Canceled;
 struct LogEnabled;
 struct LogDisabled;
+
 
 struct Simulator : sc::state_machine< Simulator, SimulatorSetup >
 { 
