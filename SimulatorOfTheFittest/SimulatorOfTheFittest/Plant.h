@@ -1,6 +1,6 @@
 #ifndef PLANT_H
 #define PLANT_H
-#endif
+
 
 #include "Actor.h"
 
@@ -10,3 +10,5 @@ public:
 	Plant(float mass);
 	void show();
 };
+
+#endif

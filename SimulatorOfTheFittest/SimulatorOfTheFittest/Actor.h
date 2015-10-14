@@ -10,6 +10,8 @@ protected:
 	std::string name_;
 public:
 	virtual void show() = 0;
+	virtual std::string getName(){ return name_; }
+	virtual float getMass(){ return mass_; }
 };
 
 #endif

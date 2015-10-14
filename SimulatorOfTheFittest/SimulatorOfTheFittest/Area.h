@@ -2,13 +2,17 @@
 #define AREA_H
 
 #include <iostream>
+#include <vector>
 #include <string>
 #include <time.h>
 #include <algorithm>
 
-#include <Objbase.h>
+//#include <Objbase>
 
-
+#include "Actor.h"
+#include "Plant.h"
+#include "Carnivore.h"
+#include "Herbivore.h"
 
 class Area
 {
@@ -17,86 +21,14 @@ private:
 	int seed_;
 	std::vector<Actor*> actors_;
 public:
-	Area()
-	{
-		GUID gidReference;
-		HRESULT hCreateGuid = CoCreateGuid(&gidReference);
+	Area();
 
-		seed_ = gidReference.Data1;
-
-		srand(seed_);
-
-		switch (rand() % 4)
-		{
-		case 0:
-			name_ = "Forrest area";
-			break;
-		case 1:
-			name_ = "Beach area";
-			break;
-		case 2:
-			name_ = "Dessert area";
-			break;
-		case 3:
-			name_ = "Flat area";
-			break;
-		default:
-			name_ = "default Area";
-			break;
-		}
-
-		actors_ = std::vector<Actor*>();
-		generateRandomActors();
-	}
-
-	std::string getName() const
-	{
-		return name_;
-	}
-
-	int getSeed() const
-	{
-		return seed_;
-	}
-
-	int getRandomNumber() const
-	{
-		return rand();
-	}
-
-	void generateRandomActors()
-	{
-		while (rand() % 100 < 5)
-		{
-			actors_.push_back(new Plant(rand()%100/100));
-		}
-		while (rand() % 100 < 5)
-		{
-			actors_.push_back(new Carnivore(950 + rand()%100));
-		}
-		while (rand() % 100 < 5)
-		{
-			actors_.push_back(new Herbivore(950 + rand() % 100));
-		}
-	}
-
-	void printAllActors()
-	{
-		for (int i = 0; i < actors_.size(); i++)
-		{
-			actors_[i]->show();
-		}
-	}
-
-	void act()
-	{
-		if (std::find(actors_.begin(), actors_.end(), new Plant(42)) != actors_.end())
-		{
-
-		}
-
-	}
-
+	std::string getName() const;
+	int getSeed() const;
+	int getRandomNumber() const;
+	void generateRandomActors();
+	void printAllActors();
+	void act();
 };
 
 inline std::ostream & operator<<(std::ostream & Str, Area const & v) {
