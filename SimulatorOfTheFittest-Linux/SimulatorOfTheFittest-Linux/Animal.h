@@ -8,17 +8,22 @@ class Animal : public Actor
 {
 protected:
 	bool hasEaten_;
+	int hungerBar_;
 public:
 	virtual bool hasEaten(){ return hasEaten_; }
 	virtual void eat(Actor* actor)
 	{ 
 		std::cout << "I ate a " << actor->getName() << " and i liked it" << std::endl;
-		mass_ = mass_ + actor->getMass();
+		hungerBar_--;
 		hasEaten_ = true;
 	}
 	virtual void setHasEaten(bool c)
 	{
 		hasEaten_ = c;
+	}
+	virtual void getHungry()
+	{
+		hungerBar_++;
 	}
 };
 

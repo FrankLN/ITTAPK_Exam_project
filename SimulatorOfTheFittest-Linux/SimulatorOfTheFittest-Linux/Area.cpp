@@ -51,7 +51,7 @@ void Area::generateRandomActors()
 {
 	while (rand() % 100 < 70)
 	{
-		actors_.push_back(new Plant(rand() % 100 / 100));
+		actors_.push_back(new Plant(rand() % 100));
 	}
 	while (rand() % 100 < 70)
 	{
@@ -121,7 +121,9 @@ void Area::act()
 	{
 		if (actors_[i]->getName() != "Plant")
 		{
-			dynamic_cast<Animal*>(actors_[i])->setHasEaten(false);
+			Animal* temp  = dynamic_cast<Animal*>(actors_[i]);
+			temp->setHasEaten(false);
+			temp->getHungry();
 		}
 	}
 	

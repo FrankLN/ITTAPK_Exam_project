@@ -14,5 +14,7 @@ int main()
 	wm.printAll();	
 	wm.actAll();
 	
+	wm.actAll();
+	
 	return 0;
 }
