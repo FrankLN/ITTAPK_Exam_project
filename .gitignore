@@ -9,6 +9,7 @@
 *.suo
 *obj/*
 *bin/*
+*Debug/*
 *.user
 *.obj
 

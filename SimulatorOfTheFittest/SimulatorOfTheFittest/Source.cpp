@@ -9,13 +9,8 @@
 
 void main()
 {
-	Actor * actor = new Carnivore(42);
-	actor->show();
-	actor = new Herbivore(42);
-	actor->show();
-	actor = new Plant(42);
-	actor->show();
+	WorldMap<Area, 10> wm = WorldMap<Area, 10>();
 
-	Carnivore actors(42);
-	actors.show();
+	wm.printAll();
+	wm.actAll();
 }
