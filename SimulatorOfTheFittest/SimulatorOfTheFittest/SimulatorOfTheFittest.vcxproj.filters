@@ -36,7 +36,11 @@
     <ClCompile Include="Herbivore.cpp">
       <Filter>Source Files\Actors</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Simulation.cpp">
+=======
     <ClCompile Include="Area.cpp">
+>>>>>>> c7bd7f029ed4e7a2697461965a84d45b7b42c407
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
