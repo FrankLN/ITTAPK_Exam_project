@@ -5,9 +5,9 @@
 #include <typeinfo>
 #include <string>
 
-namespace mySTL
+namespace myATL
 {
-	struct NullType{};
+	struct NullType{};	
 
 	template<typename T, typename R>
 	struct ActorTypeList
@@ -21,9 +21,6 @@ namespace mySTL
 	{
 		typedef NullType First;
 		typedef NullType Rest;
-
-		First first;
-		Rest rest;
 	};
 
 	template<typename T>
@@ -102,7 +99,57 @@ namespace mySTL
 	{
 		typedef ActorTypeList<First, Rest> type;
 	};
-
+	
+	template<typename L>
+	struct length{};
+	
+	template<typename First, typename Rest>
+	struct length<ActorTypeList<First, Rest>>
+	{
+		static const int value = 1 + length<Rest>::value;
+	};
+	
+	template<typename First>
+	struct length<ActorTypeList<First, NullType>>
+	{
+		static const int value = 1;
+	};
+	
+	template<>
+	struct length<ActorTypeList<NullType, NullType>>
+	{
+		static const int value = 0;
+	};
+	
+	template<>
+	struct length<NullType>
+	{
+		static const int value = 0;
+	};
+	
+	template<typename TL, size_t I>
+	struct AtIndex
+	{
+		typedef typename AtIndex<typename TL::Rest, I - 1>::type type;
+	};
+	
+	template<typename TL>
+	struct AtIndex<TL, 0>
+	{
+		typedef typename TL::First type;
+	};
+	
+	template<typename T, typename U>
+	struct IsSame
+	{
+		static const bool value = false;
+	};
+	
+	template<typename T>
+	struct IsSame<T, T>
+	{
+		static const bool value = true;
+	};
 }
 
 
