@@ -1,4 +1,5 @@
 #include <random>
+#include <boost/smart_ptr.hpp>
 
 #include "Area.h"
 
@@ -30,6 +31,17 @@ Area::Area()
 
 	actors_ = std::vector<Actor*>();
 	generateRandomActors();
+}
+
+Area::~Area()
+{
+	for (int i = 0; i < actors_.size(); i++)
+	{
+		std::cout << "Delete:\t" << actors_[i]->getName() << std::endl;
+		delete actors_[i];
+	}
+
+	std::cout << "Area destroyed!" << std::endl;
 }
 
 std::string Area::getName() const
@@ -90,6 +102,7 @@ void Area::act()
 					if (!temp->hasEaten())
 					{
 						temp->eat(actors_[i]);
+						delete actors_[i];
 						actors_.erase(actors_.begin() + i);
 						s = actors_.size();
 						i--;

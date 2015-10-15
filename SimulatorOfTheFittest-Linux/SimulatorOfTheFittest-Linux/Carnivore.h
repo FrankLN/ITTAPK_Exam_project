@@ -10,6 +10,8 @@ class Carnivore : public Animal
 {
 public:
 	Carnivore(float);
+	~Carnivore();
+
 	void show();
 };
 

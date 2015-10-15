@@ -9,6 +9,7 @@ class Plant : public Actor
 {
 public:
 	Plant(float mass);
+	~Plant();
 	void show();
 };
 

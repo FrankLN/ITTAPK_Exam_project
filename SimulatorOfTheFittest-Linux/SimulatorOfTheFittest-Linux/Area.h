@@ -20,6 +20,7 @@ private:
 	std::vector<Actor*> actors_;
 public:
 	Area();
+	~Area();
 
 	std::string getName() const;
 	int getSeed() const;

@@ -8,6 +8,11 @@ Herbivore::Herbivore(float mass)
 	hasEaten_ = false;
 }
 
+Herbivore::~Herbivore()
+{
+	std::cout << "I(Herbivore) died" << std::endl;
+}
+
 void Herbivore::show()
 {
 	std::cout << "I'm a " << name_ << ", I eat plants. My hunger is " << hungerBar_ << " out of 10(where 10 is dead of hunger)" << std::endl;
