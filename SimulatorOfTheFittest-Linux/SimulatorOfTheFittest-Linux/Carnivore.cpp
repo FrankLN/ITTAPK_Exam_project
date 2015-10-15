@@ -1,7 +1,4 @@
 #include "Carnivore.h"
-#include <iostream>
-#include <string>
-#include <typeinfo>
 
 Carnivore::Carnivore(float mass)
 {

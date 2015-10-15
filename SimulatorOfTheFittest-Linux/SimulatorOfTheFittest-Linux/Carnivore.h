@@ -1,6 +1,8 @@
 #ifndef CARNIVORE_H
 #define CARNIVORE_H
 
+#include <iostream>
+#include <typeinfo>
 
 #include "Animal.h"
 

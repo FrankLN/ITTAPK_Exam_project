@@ -72,5 +72,8 @@
     <ClInclude Include="WorldMap.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="ActorTypeList.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,4 @@
 #include "Herbivore.h"
-#include <iostream>
-#include <typeinfo>
 
 Herbivore::Herbivore(float mass)
 {

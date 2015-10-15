@@ -1,6 +1,4 @@
 #include "Plant.h"
-#include <iostream>
-#include <typeinfo>
 
 Plant::Plant(float mass)
 {

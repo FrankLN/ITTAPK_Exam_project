@@ -43,8 +43,9 @@
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
     <NMakeOutput>$(ProjectDir)SimulatorOfTheFittest-Linux-Debug.vgdbsettings</NMakeOutput>
-    <IncludePath>C:\Program Files\boost\boost_1_55_0</IncludePath>
-    <ReferencePath />
+    <IncludePath>C:\Program Files\boost\boost_1_55_0, C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost; C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost</IncludePath>
+    <ReferencePath>
+    </ReferencePath>
     <LibraryPath />
     <NMakePreprocessorDefinitions>__VisualGDB_CFG_Debug;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
   </PropertyGroup>
@@ -56,8 +57,9 @@
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
     <NMakeOutput>$(ProjectDir)SimulatorOfTheFittest-Linux-Release.vgdbsettings</NMakeOutput>
-    <IncludePath />
-    <ReferencePath />
+    <IncludePath>, C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost; C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost</IncludePath>
+    <ReferencePath>
+    </ReferencePath>
     <LibraryPath />
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -78,6 +80,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="ActorList.h" />
+    <ClInclude Include="ActorTypeList.h" />
     <ClInclude Include="Animal.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="Carnivore.h" />
