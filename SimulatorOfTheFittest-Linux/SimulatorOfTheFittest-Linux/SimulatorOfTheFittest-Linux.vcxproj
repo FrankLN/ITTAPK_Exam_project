@@ -43,7 +43,7 @@
     <NMakeCleanCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /clean "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeCleanCommandLine>
     <NMakeReBuildCommandLine>"$(VISUALGDB_DIR)\VisualGDB.exe" /rebuild "$(ProjectPath)" "/solution:$(SolutionPath)" "/config:$(Configuration)" "/platform:$(Platform)"</NMakeReBuildCommandLine>
     <NMakeOutput>$(ProjectDir)SimulatorOfTheFittest-Linux-Debug.vgdbsettings</NMakeOutput>
-    <IncludePath>C:\Program Files\boost\boost_1_55_0, C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost; C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost</IncludePath>
+    <IncludePath>C:\Program Files\boost\boost_1_55_0, C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost; C:\Program Files (x86)\Microsoft Visual Studio 12.0\boost;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <ReferencePath>
     </ReferencePath>
     <LibraryPath />
