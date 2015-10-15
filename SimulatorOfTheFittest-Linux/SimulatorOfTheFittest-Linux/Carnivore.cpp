@@ -10,7 +10,7 @@ Carnivore::Carnivore(float mass)
 
 Carnivore::~Carnivore()
 {
-	std::cout << "I(Carnivore) died" << std::endl;
+	//std::cout << "I(Carnivore) died" << std::endl;
 }
 
 

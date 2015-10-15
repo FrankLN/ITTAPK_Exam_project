@@ -37,11 +37,8 @@ Area::~Area()
 {
 	for (int i = 0; i < actors_.size(); i++)
 	{
-		std::cout << "Delete:\t" << actors_[i]->getName() << std::endl;
 		delete actors_[i];
 	}
-
-	std::cout << "Area destroyed!" << std::endl;
 }
 
 std::string Area::getName() const

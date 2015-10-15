@@ -12,7 +12,7 @@
 
 int main()
 {
-	WorldMap<Area, 1> wm = WorldMap<Area, 1>();
+	WorldMap<Area, 10> wm = WorldMap<Area, 10>();
 
 	Simulator mySimulator;
 	mySimulator.initiate();

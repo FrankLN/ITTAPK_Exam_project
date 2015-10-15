@@ -10,7 +10,7 @@ Herbivore::Herbivore(float mass)
 
 Herbivore::~Herbivore()
 {
-	std::cout << "I(Herbivore) died" << std::endl;
+	//std::cout << "I(Herbivore) died" << std::endl;
 }
 
 void Herbivore::show()

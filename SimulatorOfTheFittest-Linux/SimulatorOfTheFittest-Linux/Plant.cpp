@@ -8,7 +8,7 @@ Plant::Plant(float mass)
 
 Plant::~Plant()
 {
-	std::cout << "I(Plant) died" << std::endl;
+	//std::cout << "I(Plant) died" << std::endl;
 }
 
 void Plant::show()
