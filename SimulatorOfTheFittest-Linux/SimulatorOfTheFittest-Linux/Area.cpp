@@ -59,15 +59,15 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	while (rand() % 100 < 20)
+	while (rand() % 100 < 50)
 	{
 		actors_.push_back(new Plant(rand() % 100));
 	}
-	while (rand() % 100 < 20)
+	while (rand() % 100 < 50)
 	{
 		actors_.push_back(new Carnivore(950 + rand() % 100));
 	}
-	while (rand() % 100 < 20)
+	while (rand() % 100 < 50)
 	{
 		actors_.push_back(new Herbivore(950 + rand() % 100));
 	}
@@ -99,7 +99,7 @@ void Area::act()
 					Carnivore* temp = dynamic_cast<Carnivore*>(actors_[j]);
 					if (!temp->hasEaten())
 					{
-						temp->eat(actors_[i]);
+						temp->eat<Herbivore>(actors_[i]);
 						delete actors_[i];
 						actors_.erase(actors_.begin() + i);
 						s = actors_.size();
@@ -118,7 +118,7 @@ void Area::act()
 					Herbivore* temp = dynamic_cast<Herbivore*>(actors_[j]);
 					if (!temp->hasEaten())
 					{
-						temp->eat(actors_[i]);
+						temp->eat<Plant>(actors_[i]);
 						actors_.erase(actors_.begin() + i);
 						s = actors_.size();
 						i--;

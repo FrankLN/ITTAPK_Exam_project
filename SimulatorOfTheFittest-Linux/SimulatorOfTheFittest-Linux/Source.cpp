@@ -13,6 +13,9 @@ int main()
 {
 	WorldMap<Area, 1> wm = WorldMap<Area, 1>();
 	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
 		
 	/*Actor* aPtr;
 	

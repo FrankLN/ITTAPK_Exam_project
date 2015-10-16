@@ -12,11 +12,13 @@ protected:
 	int hungerBar_;
 public:
 	virtual bool hasEaten(){ return hasEaten_; }
+	
+	template<typename T>
 	void eat(Actor* actor)
 	{ 
 		std::string result = "someting";
-		//if (myHelper::IsType<Plant, Actor>(actor))
-			//result = "Plant";
+		if (myHelper::IsType<T, Actor>(actor))
+			result = "a " + std::string(typeid(T).name()).substr(1);
 		//else if (myHelper::IsType<Herbivore, Actor>(actor))
 			//result = "Herbivore";
 		//else if (myHelper::IsType<Carnivore, Actor>(actor))
