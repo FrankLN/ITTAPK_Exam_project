@@ -7,13 +7,22 @@
 #include "WorldMap.h"
 #include "Area.h"
 #include "Simulation.cpp"
-#include "ActorTypeList.h"
 #include <boost/smart_ptr.hpp>
 
 int main()
 {
 	WorldMap<Area, 1> wm = WorldMap<Area, 1>();
+	wm.actAll();
+		
+	/*Actor* aPtr;
 	
+	aPtr = new Plant(10);
+	
+	bool test = myHelper::IsType<Plant, Actor>(aPtr);	
+	std::cout << test << std::endl;
+	
+	test = myHelper::IsType<Herbivore, Actor>(aPtr);
+	std::cout << test << std::endl;*/
 	
 	Simulator mySimulator;
 	mySimulator.initiate();

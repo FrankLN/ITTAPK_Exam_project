@@ -2,6 +2,7 @@
 #include <boost/smart_ptr.hpp>
 
 #include "Area.h"
+#include "SharedHelperFunctions.h"
 
 Area::Area()
 {
@@ -89,11 +90,11 @@ void Area::act()
 	
 	for(int i=0; i<s; i++)
 	{
-		if (actors_[i]->getName() == "Herbivore")
+		if(myHelper::IsType<Herbivore, Actor>(actors_[i]))
 		{
 			for (int j = 0; j < s; j++)
 			{
-				if (actors_[j]->getName() == "Carnivore")
+				if (myHelper::IsType<Carnivore, Actor>(actors_[j]))
 				{
 					Carnivore* temp = dynamic_cast<Carnivore*>(actors_[j]);
 					if (!temp->hasEaten())
@@ -108,11 +109,11 @@ void Area::act()
 				}
 			}
 		}
-		else if (actors_[i]->getName() == "Plant")
+		else if (myHelper::IsType<Plant, Actor>(actors_[i]))
 		{
 			for(int j=i; j<s; j++)
 			{
-				if (actors_[j]->getName() == "Herbivore")
+				if (myHelper::IsType<Herbivore, Actor>(actors_[j]))
 				{
 					Herbivore* temp = dynamic_cast<Herbivore*>(actors_[j]);
 					if (!temp->hasEaten())
@@ -130,7 +131,7 @@ void Area::act()
 	
 	for (int i = 0; i < s; i++)
 	{
-		if (actors_[i]->getName() != "Plant")
+		if (!myHelper::IsType<Plant, Actor>(actors_[i]))
 		{
 			Animal* temp  = dynamic_cast<Animal*>(actors_[i]);
 			temp->setHasEaten(false);

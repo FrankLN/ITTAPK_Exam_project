@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Actor.h"
+#include "SharedHelperFunctions.h"
 
 class Animal : public Actor
 {
@@ -11,9 +12,17 @@ protected:
 	int hungerBar_;
 public:
 	virtual bool hasEaten(){ return hasEaten_; }
-	virtual void eat(Actor* actor)
+	void eat(Actor* actor)
 	{ 
-		std::cout << "I ate a " << actor->getName() << " and i liked it" << std::endl;
+		std::string result = "someting";
+		//if (myHelper::IsType<Plant, Actor>(actor))
+			//result = "Plant";
+		//else if (myHelper::IsType<Herbivore, Actor>(actor))
+			//result = "Herbivore";
+		//else if (myHelper::IsType<Carnivore, Actor>(actor))
+			//result = "Carnivore";
+
+		std::cout << "I ate " << result << " and i liked it" << std::endl;
 		hungerBar_--;
 		hasEaten_ = true;
 	}

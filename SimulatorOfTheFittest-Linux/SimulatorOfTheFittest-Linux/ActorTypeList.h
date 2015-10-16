@@ -4,6 +4,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <string>
+#include "Plant.h"
 
 namespace myATL
 {
@@ -150,6 +151,7 @@ namespace myATL
 	{
 		static const bool value = true;
 	};
+		
 }
 
 

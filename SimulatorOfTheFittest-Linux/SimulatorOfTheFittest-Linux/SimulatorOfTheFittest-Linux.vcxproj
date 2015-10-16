@@ -86,6 +86,7 @@
     <ClInclude Include="Carnivore.h" />
     <ClInclude Include="Herbivore.h" />
     <ClInclude Include="Plant.h" />
+    <ClInclude Include="SharedHelperFunctions.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

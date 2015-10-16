@@ -5,12 +5,9 @@
 
 class Actor
 {
-protected:
-	std::string name_;
 public:
 	virtual ~Actor(){};
 	virtual void show() = 0;
-	virtual std::string getName(){ return name_; }
 };
 
 #endif
