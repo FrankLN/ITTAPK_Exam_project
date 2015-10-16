@@ -5,10 +5,18 @@
 #include "Area.h"
 #include <typeinfo>
 
-template<typename T, size_t X, size_t Y = X>
-class WorldMap
+class WorldMapHolder
 {
 public:
+	virtual ~WorldMapHolder() {};
+	virtual void printAll() = 0;
+	virtual void actAll() = 0;
+};
+
+template<typename T, size_t X, size_t Y = X>
+class WorldMap : public WorldMapHolder
+{
+public:	
 	void printAll()
 	{
 		for (int i = 0; i < X; i++)
@@ -29,9 +37,9 @@ private:
 };
 
 template<size_t X, size_t Y>
-class WorldMap<Area, X, Y>
+class WorldMap<Area, X, Y> : public WorldMapHolder
 {
-public:
+public:	
 	void printAll()
 	{
 		for (int i = 0; i < X; i++)
@@ -55,6 +63,14 @@ public:
 	}
 private:
 	Area data_[X][Y];
+};
+
+struct GetWorldMap
+{
+	static WorldMapHolder* getWorldMap(int p1, int p2)
+	{
+		return new WorldMap<Area, 1>();
+	}
 };
 
 #endif
