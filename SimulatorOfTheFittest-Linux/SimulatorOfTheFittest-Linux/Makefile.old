@@ -35,7 +35,11 @@ error:
 	$(error Invalid configuration, please check your inputs)
 endif
 
+<<<<<<< 0b071b1a946db9f2b2f00224cb0501d39077935c
 SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Plant.cpp Simulation.cpp Source.cpp Start.cpp
+=======
+SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Plant.cpp Simulation.cpp Source.cpp
+>>>>>>> testin stuff
 EXTERNAL_LIBS := 
 EXTERNAL_LIBS_COPIED := $(foreach lib, $(EXTERNAL_LIBS),$(BINARYDIR)/$(notdir $(lib)))
 
