@@ -1,6 +1,9 @@
 #include <random>
-
+#include <boost/signals2.hpp>
 #include "Area.h"
+#include "Log.h"
+
+#define chance 60
 
 Area::Area()
 {
@@ -49,30 +52,131 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	while (rand() % 100 < 20)
+	// for testing
+	actors_.push_back(new Carnivore(950 + rand() % 100));
+	actors_.push_back(new Herbivore(950 + rand() % 100));
+	actors_.push_back(new Herbivore(950 + rand() % 100));
+	actors_.push_back(new Herbivore(950 + rand() % 100));
+	actors_.push_back(new Plant(rand() % 100));
+
+	/*
+	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Plant(rand() % 100));
 	}
-	while (rand() % 100 < 20)
+	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Carnivore(950 + rand() % 100));
 	}
-	while (rand() % 100 < 20)
+	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Herbivore(950 + rand() % 100));
 	}
+	*/
 }
 
 void Area::printAllActors()
 {
-	for (int i = 0; i < actors_.size(); i++)
+	// c++11 for loop
+	for (auto &a : actors_)
 	{
-		actors_[i]->show();
+		a->show();
 	}
 }
 
 void Area::act()
-{	
+{
+	// create an iterator that proints to the end of the vetor
+	auto end = actors_.end();
+
+	// set hasEaten to false for all animals
+	std::for_each(actors_.begin(), end, [](Actor* a)
+	{
+		if (a->getName() != "Plant")
+		{
+			static_cast<Animal*>(a)->setHasEaten(false);
+		}
+	});
+
+	// loop through the vector
+	for (auto it = actors_.begin(); it != end; it++)
+	{
+		if ((*it)->getName() == "Carnivore")
+		{
+			std::cout << (*it)->getName() << ".action()" << std::endl;
+
+			// see if there are any herbivores in the vector
+			auto herb = std::find_if(actors_.begin(), actors_.end(), [](Actor *a)
+			{
+				return a->getName() == "Herbivore";
+			});
+
+			if (herb == actors_.end())
+			{
+				// count hungerBar up, and erase if it hits max
+				if (static_cast<Carnivore*>(*it)->increaseHunger())
+				{
+					// erase the carnivore from the vector
+					it = actors_.erase(it);
+					// TODO boost signal
+				}			
+			}
+			else
+			{
+				// erase the herbivore from the vector
+				herb = actors_.erase(herb);
+				// update hunger and hasEaten
+				static_cast<Carnivore*>(*it)->eat();
+				// TODO boost signal
+				// update iterators
+				end = actors_.end();
+				it += (it > herb ? 1 : 0);
+			}
+		}
+		else if ((*it)->getName() == "Herbivore")
+		{
+			std::cout << (*it)->getName() << ".action()" << std::endl;
+
+			// see if there are any plants in the vector
+			auto plant = std::find_if(actors_.begin(), actors_.end(), [](Actor *a)
+			{
+				return a->getName() == "Plant";
+			});
+
+			if (plant == actors_.end())
+			{
+				// count hungerBar up, and erase if it hits max
+				if (static_cast<Herbivore*>(*it)->increaseHunger())
+				{
+					// erase the carnivore from the vector
+					it = actors_.erase(it);
+					// TODO boost signal
+				}
+			}
+			else
+			{
+				// erase the herbivore from the vector
+				plant = actors_.erase(plant);
+				// update hunger and hasEaten
+				static_cast<Herbivore*>(*it)->eat();
+				// TODO boost signal
+				//boost::signals2::signal<void()>	sig;
+				//sig.connect(&Log::print);
+				//sig();
+				// update iterators
+				end = actors_.end();
+				it += (it > plant ? 1 : 0);
+			}
+		}
+		else if ((*it)->getName() == "Plant")
+		{
+			std::cout << (*it)->getName() << ".action()" << std::endl;
+		}
+	}
+
+	//std::for_each(actors_.begin(), actors_.end(), [=](Actor *a){ a->action(&actors_); });
+
+	/*
 	std::cout << "<<<Before act>>>" << std::endl;
 	printAllActors();
 	
@@ -142,4 +246,15 @@ void Area::act()
 	std::cout << "<<<New generates>>>" << std::endl;
 	generateRandomActors();
 	printAllActors();
+	*/
+}
+
+void Area::move()
+{
+	
+}
+
+std::vector<Actor*> *Area::getActors()
+{
+	return &actors_;
 }

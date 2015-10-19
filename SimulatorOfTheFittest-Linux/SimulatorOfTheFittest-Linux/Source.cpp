@@ -12,18 +12,19 @@
 
 int main()
 {
-	WorldMap<Area, 1> wm = WorldMap<Area, 1>();
+	WorldMap<Area, 1, 2> wm = WorldMap<Area, 1, 2>();
+	wm.printAll();
+	wm.actAll();
 
+
+	/*
 	ActorTypeList<Plant, ActorTypeList<Herbivore, NullType>> aTL;
 
 	std::cout << " " << std::endl;
-	
-	
+
 	Simulator mySimulator;
 	mySimulator.initiate();
-	
-	
-	
+	*/
 	
 	return 0;
 }

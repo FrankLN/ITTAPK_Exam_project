@@ -27,6 +27,8 @@ public:
 	void generateRandomActors();
 	void printAllActors();
 	void act();
+	void move();
+	std::vector<Actor*> *getActors();
 };
 
 inline std::ostream & operator<<(std::ostream & Str, Area const & v) {

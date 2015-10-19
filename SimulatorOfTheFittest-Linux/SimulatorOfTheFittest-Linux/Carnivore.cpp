@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Carnivore.h"
 
 Carnivore::Carnivore(float mass)
@@ -5,6 +6,7 @@ Carnivore::Carnivore(float mass)
 	hungerBar_ = 5;
 	name_ = typeid(this).name();
 	name_ = name_.substr(2);
+	hasMoved_ = false;
 	hasEaten_ = false;
 }
 
