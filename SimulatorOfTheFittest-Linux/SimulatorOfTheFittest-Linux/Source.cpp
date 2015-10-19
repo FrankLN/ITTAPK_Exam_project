@@ -13,7 +13,6 @@ void start();
 
 int main()
 {
-
 	//WorldMapHolder* ptr = new WorldMap<Area, 1>();
 	//
 	//ptr->actAll();
@@ -35,7 +34,10 @@ int main()
 	
 	//start();	
 
-	WorldMap<Area, 1, 2> wm = WorldMap<Area, 1, 2>();
+	//WorldMap<Area, 1, 2> wm = WorldMap<Area, 1, 2>();
+
+	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
+
 	wm.printAll();
 	wm.actAll();
 
