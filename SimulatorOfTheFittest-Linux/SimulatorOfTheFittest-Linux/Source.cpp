@@ -109,7 +109,7 @@ void start()
 			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
 			mySimulator.process_event(EvLogOnOff());
 			break;
-		default:
+
 		}
 	}
 
