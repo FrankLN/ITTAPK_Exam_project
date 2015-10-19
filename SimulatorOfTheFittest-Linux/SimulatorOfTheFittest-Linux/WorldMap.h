@@ -40,11 +40,18 @@ class WorldMap<Area, X, Y>
 public:
 	void printAll()
 	{
-		for (int i = 0; i < X; i++)
+		/*for (int i = 0; i < X; i++)
 		{
 			for (int j = 0; j < Y; j++)
 			{
 				std::cout << data_[i][j] << std::endl;
+			}
+		}*/
+		for (auto row = data_.begin(); row != data_.end(); row++)
+		{
+			for (auto area = row->begin(); area != row->end(); area++)
+			{
+				std::cout << area << std::endl;
 			}
 		}
 	}
@@ -69,11 +76,11 @@ public:
 	}
 	void move()
 	{
-		for (auto rows = data_.begin(); rows != data_.end(); rows++)
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (auto area = rows->begin(); area != rows->end(); area++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				std::vector<Animal*> animals;
+				// get actor array from current area
 				std::vector<Actor*>* actors = area->getActors();
 
 				for (auto it = actors->begin(); it != actors->end(); it++)
@@ -84,34 +91,27 @@ public:
 						if (a->getHasEaten() == false && a->getHasMoved() == false)
 						{
 							a->setHasMoved(true);
-							animals.push_back(a);
-							std::next(area)->getActors()->push_back(a);
+
+							if (std::next(area) != row->end())
+							{
+								std::next(area)->getActors()->push_back(a);
+							}
+							else
+							{
+								if (std::next(row) != data_.end())
+								{
+									row->begin()->getActors()->push_back(a);
+								}
+								else
+								{
+									data_.begin()->begin()->getActors()->push_back(a);
+								}
+							}
 						}
 					}
 				}
 			}
 		}
-
-		/*for (auto &rows : data_)
-		{
-			//for (auto area : rows)
-			{
-				std::vector<Animal*> animals;
-				std::vector<Actor*>* actors = area.getActors();
-
-				for (auto it = actors->begin(); it != actors->end(); it++)
-				{
-					if ((*it)->getName() != "Plant")
-					{
-						auto a = static_cast<Animal*>(*it);
-						if (a->getHasEaten() == false && a->getHasMoved() == false)
-						{
-							animals.push_back(a);
-						}
-					}
-				}
-			}
-		}*/
 	}
 private:
 	//Area data_[X][Y];
