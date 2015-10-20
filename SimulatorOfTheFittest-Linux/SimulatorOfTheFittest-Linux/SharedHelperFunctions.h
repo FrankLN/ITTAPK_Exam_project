@@ -6,6 +6,20 @@
 
 #include <boost/preprocessor.hpp>
 
+struct ResultToConsole
+{
+	void operator()(std::vector<Actor*> actors) const { actors[0]->show(); }
+};
+
+struct ResultToFile
+{
+	void operator()(std::vector<Actor*> actors) const 
+	{ 
+		actors[0]->show(); 
+	}
+};
+
+
 namespace myHelper
 {	
 	template<typename DstType, typename SrcType>
@@ -24,6 +38,7 @@ namespace myHelper
 		
 		dst = result;
 	}
+
 }
 
 #endif

@@ -4,6 +4,8 @@
 #include <boost/statechart/transition.hpp>
 #include <boost/mpl/list.hpp>
 #include <boost/algorithm/string.hpp>
+#include <cstdlib>
+#include <thread>
 
 #include <iostream>
 #include <string>
@@ -14,6 +16,8 @@
 #include "WorldMap.h"
 #include "Area.h"
 #include "SharedHelperFunctions.h"
+
+#define NUM_THREADS 5
 
 namespace sc = boost::statechart;
 namespace mpl = boost::mpl;
@@ -32,6 +36,7 @@ struct Finished;
 struct Canceled;
 struct LogEnabled;
 struct LogDisabled;
+
 
 struct Simulator : sc::state_machine< Simulator, SimulatorSetup >
 { 
@@ -139,10 +144,12 @@ struct Running : sc::simple_state < Running, Simulator, LogEnabled >
 	typedef mpl::list < sc::transition< EvCancel, Canceled>,
 		sc::transition< EvSimulationFinished, Finished>,
 		sc::transition< EvPauseRun, Paused> > reactions;
-	
+
+
+
 	Running()
 	{
-		//std::cout << "Running Entered";
+
 	}
 
 	~Running()
@@ -157,6 +164,7 @@ struct LogEnabled : sc::simple_state < LogEnabled, Running >
 
 	LogEnabled()
 	{
+		//context<Simulator>().myStartThread();
 		std::cout << "<=---------Running: LogEnabled-----------=>" << std::endl;
 	}
 
@@ -165,6 +173,7 @@ struct LogEnabled : sc::simple_state < LogEnabled, Running >
 		//std::cout << "LogEnabled Exited" << std::endl;
 	}
 };
+
 
 struct LogDisabled : sc::simple_state < LogDisabled, Running >
 {
