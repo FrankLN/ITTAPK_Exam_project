@@ -24,7 +24,7 @@ public:
 		//else if (myHelper::IsType<Carnivore, Actor>(actor))
 			//result = "Carnivore";
 
-		std::cout << "I ate " << result << " and i liked it" << std::endl;
+		//std::cout << "I ate " << result << " and i liked it" << std::endl;
 		hungerBar_--;
 		hasEaten_ = true;
 	}

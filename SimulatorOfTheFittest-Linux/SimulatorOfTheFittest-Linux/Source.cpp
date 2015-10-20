@@ -32,7 +32,23 @@ int main()
 	test = myHelper::IsType<Herbivore, Actor>(aPtr);
 	std::cout << test << std::endl;*/
 	
-	start();	
+	//start();
+
+	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
+
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	wm.actAll();
+	
+
+	std::cout << "----------------------------------" << std::endl;
+
+	wm.printAllActors();
 	
 	return 0;
 }

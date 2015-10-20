@@ -4,6 +4,7 @@ Carnivore::Carnivore(float mass)
 {
 	hungerBar_ = 5;
 	hasEaten_ = false;
+	age_ = 0;
 }
 
 Carnivore::~Carnivore()
@@ -13,5 +14,10 @@ Carnivore::~Carnivore()
 
 void Carnivore::show()
 {
-	std::cout << "I'm a Carnivore, I eat meat. My hunger is " << hungerBar_ << " out of 10(where 10 is dead of hunger)" << std::endl;
+	std::cout << "Actor:\tCarnivore" << std::endl << "Age:\t" << age_ << std::endl << "Hunger:\t" << hungerBar_ << " out of 10(where 10 is dead of hunger)" << std::endl << std::endl;
+}
+
+std::string Carnivore::showToString()
+{
+	return "Actor:\tCarnivore\nAge:\t" + age_ + "\nHunger:\t" + hungerBar_ + " out of 10(where 10 is dead of hunger)";
 }

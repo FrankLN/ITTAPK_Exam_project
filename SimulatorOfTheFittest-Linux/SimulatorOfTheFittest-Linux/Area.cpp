@@ -59,15 +59,15 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	while (rand() % 100 < 50)
+	while (rand() % 100 < 70)
 	{
 		actors_.push_back(new Plant(rand() % 100));
 	}
-	while (rand() % 100 < 50)
+	while (rand() % 100 < 70)
 	{
 		actors_.push_back(new Carnivore(950 + rand() % 100));
 	}
-	while (rand() % 100 < 50)
+	while (rand() % 100 < 70)
 	{
 		actors_.push_back(new Herbivore(950 + rand() % 100));
 	}
@@ -83,8 +83,8 @@ void Area::printAllActors()
 
 void Area::act()
 {	
-	std::cout << "<<<Before act>>>" << std::endl;
-	printAllActors();
+	//std::cout << "<<<Before act>>>" << std::endl;
+	//printAllActors();
 	
 	size_t s = actors_.size();
 	
@@ -128,9 +128,12 @@ void Area::act()
 			}
 		}
 	}
+
+
 	
-	for (int i = 0; i < s; i++)
+	/*for (int i = 0; i < s; i++)
 	{
+		actors_[i]->incAge();
 		if (!myHelper::IsType<Plant, Actor>(actors_[i]))
 		{
 			Animal* temp  = dynamic_cast<Animal*>(actors_[i]);
@@ -143,14 +146,30 @@ void Area::act()
 			}
 				
 		}
-	}
+	}*/
+
+	int i = 0;
+	std::for_each(actors_.begin(), actors_.end(), [this, &i](Actor* actor)
+	{
+		actor->incAge();
+		if (!myHelper::IsType<Plant, Actor>(actor))
+		{
+			Animal* temp = dynamic_cast<Animal*>(actor);
+			temp->setHasEaten(false);
+			if (temp->increaseHunger())
+			{
+				actors_.erase(actors_.begin() + i);
+			}
+		}
+		i++;
+	});
 	
 	
-	std::cout << "<<<After act>>>" << std::endl;
-	printAllActors();
+	//std::cout << "<<<After act>>>" << std::endl;
+	//printAllActors();
 	
 	
-	std::cout << "<<<New generates>>>" << std::endl;
+	//std::cout << "<<<New generates>>>" << std::endl;
 	generateRandomActors();
-	printAllActors();
+	//printAllActors();
 }
