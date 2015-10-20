@@ -52,7 +52,7 @@ int main()
 	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
 	wm.printAll();
 	wm.actAll();
-
+	wm.moveAll();
 
 	/*
 	ActorTypeList<Plant, ActorTypeList<Herbivore, NullType>> aTL;

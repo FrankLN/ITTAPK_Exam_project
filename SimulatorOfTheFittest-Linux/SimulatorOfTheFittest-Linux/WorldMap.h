@@ -65,72 +65,98 @@ public:
 				area->act();
 			}
 		}
-
-		move();
 	}
 
-	void move()
+	void moveAll()
 	{
 		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
 			for (auto area = row->begin(); area != row->end(); area++)
 			{
+				area->printAllActors();
+				std::cout << "------------------------------------------" << std::endl;
+
 				// get actor array from current area
 				std::vector<Actor*>* actors = area->getActors();
+				// get end of actor vector
+				auto end = actors->end();
 
-				for (auto it = actors->begin(); it != actors->end(); it++)
+				for (auto it = actors->begin(); it != actors->end(); )
 				{
 					if (myHelper::IsType<Plant, Actor>(*it) == false)
 					{
 						auto a = static_cast<Animal*>(*it);
-						if (a->getHasEaten() == false && a->getHasMoved() == false)
+						if ((a->getHasEaten() == false) && (a->getHasMoved() == false))
 						{
 							a->setHasMoved(true);
 
 							if (std::next(area) != row->end())
 							{
-								std::next(area)->getActors()->push_back(a);
+								// move animal to next array in current row
+								std::next(area)->getActors()->push_back(std::move(a));
 							}
 							else
 							{
 								if (std::next(row) != data_.end())
 								{
-									row->begin()->getActors()->push_back(a);
+									// move animal to first array in next row
+									std::next(row)->begin()->getActors()->push_back(std::move(a));
 								}
 								else
 								{
-									data_.begin()->begin()->getActors()->push_back(a);
+									// move animal to first area in first row
+									data_.begin()->begin()->getActors()->push_back(std::move(a));
 								}
 							}
+							// erase animal from current area
+							it = actors->erase(it);
+						}
+						else
+						{
+							// increment iterator
+							it++;
 						}
 					}
+					else
+					{
+						// increment iterator
+						it++;
+					}
 				}
+
+				area->printAllActors();
+				std::cout << "------------------------------------------" << std::endl;
+
 			}
 		}
 	}
 
 	void printAllActors()
 	{
-		for (int i = 0; i < X; i++)
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				data_[i][j].printAllActors();
+				area->printAllActors();
 			}
 		}
+
 	}
 
 	std::vector<Actor*> getAllActors()
 	{
-		std::vector<Actor*> result = std::vector<Actor*>();
-		for (int i = 0; i < X; i++)
+		// create an empty vector to add all actos to
+		auto result = std::vector<Actor*>();
+		// add actors
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				std::vector<Actor*> temp = data_[i][j].getAllActors();
+				auto temp = area->getAllActors();
 				result.insert(result.end(), temp.begin(), temp.end());
 			}
 		}
+
 		return result;
 	}
 private:

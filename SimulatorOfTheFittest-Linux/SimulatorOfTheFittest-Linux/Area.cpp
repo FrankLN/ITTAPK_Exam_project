@@ -38,10 +38,12 @@ Area::Area()
 
 Area::~Area()
 {
-	for (int i = 0; i < actors_.size(); i++)
+	for (auto it = actors_.begin(); it != actors_.end(); it++)
 	{
-		delete actors_[i];
+		delete (*it);
 	}
+
+	actors_.clear();
 }
 
 std::string Area::getName() const
@@ -62,10 +64,10 @@ int Area::getRandomNumber() const
 void Area::generateRandomActors()
 {
 	// for testing
-	/*actors_.push_back(new Carnivore(950 + rand() % 100));
 	actors_.push_back(new Herbivore(950 + rand() % 100));
 	actors_.push_back(new Herbivore(950 + rand() % 100));
-	actors_.push_back(new Plant(rand() % 100));*/
+	actors_.push_back(new Carnivore(950 + rand() % 100));
+	actors_.push_back(new Plant(rand() % 100));
 
 	/*
 	while (rand() % 100 < chance)
@@ -105,12 +107,10 @@ void Area::act()
 {
 	// print all actors
 	printAllActors();
-	
-	// create an iterator that points to the end of the vector
-	auto end = actors_.end();
+	std::cout << "------------------------------------------" << std::endl;
 
 	// set hasEaten and hasMoved to false for all animals
-	std::for_each(actors_.begin(), end, [](Actor* a)
+	std::for_each(actors_.begin(), actors_.end(), [](Actor* a)
 	{
 		if (myHelper::IsType<Animal, Actor>(a))
 		{
@@ -120,7 +120,7 @@ void Area::act()
 	});
 
 	// loop through the vector
-	for (auto it = actors_.begin(); it != end; it++)
+	for (auto it = actors_.begin(); it != actors_.end(); )
 	{
 		if (myHelper::IsType<Carnivore, Actor>(*it))
 		{
@@ -137,7 +137,12 @@ void Area::act()
 				{
 					// erase the carnivore from the vector
 					it = actors_.erase(it);
-				}			
+				}
+				else
+				{
+					// increment iterator
+					it++;
+				}
 			}
 			else
 			{
@@ -145,9 +150,11 @@ void Area::act()
 				herb = actors_.erase(herb);
 				// update hunger and hasEaten
 				static_cast<Carnivore*>(*it)->eat();
-				// update iterators
-				end = actors_.end();
-				it += (it > herb ? 1 : 0);
+				// update iterator
+				if (it < herb)
+				{
+					it++;
+				}
 			}
 		}
 		else if (myHelper::IsType<Herbivore, Actor>(*it))
@@ -166,6 +173,11 @@ void Area::act()
 					// erase the carnivore from the vector
 					it = actors_.erase(it);
 				}
+				else
+				{
+					// increment iterator
+					it++;
+				}
 			}
 			else
 			{
@@ -173,20 +185,24 @@ void Area::act()
 				plant = actors_.erase(plant);
 				// update hunger and hasEaten
 				static_cast<Herbivore*>(*it)->eat();
-				// update iterators
-				end = actors_.end();
-				it += (it > plant ? 1 : 0);
+				// update iterator
+				if (it < plant)
+				{
+					it++;
+				}
 			}
 		}
 		else if (myHelper::IsType<Plant, Actor>(*it))
 		{
-			int dummy = 1;
+			// increment iterator
+			it++;
 		}
 	}
 	
 	// generate new actors and print all actors
-	generateRandomActors();
+	//generateRandomActors();
 	printAllActors();
+	std::cout << "------------------------------------------" << std::endl;
 
 }
 

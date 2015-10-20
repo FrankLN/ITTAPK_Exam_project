@@ -13,6 +13,25 @@ protected:
 	bool hasEaten_;
 	int hungerBar_;
 public:
+	/*Animal(Animal&&	other)
+	{
+		hasMoved_ = other.hasMoved_;
+		hasEaten_ = other.hasEaten_;
+		hungerBar_ = other.hungerBar_;
+		other.hasMoved_ = nullptr;
+		other.hasEaten_ = nullptr;
+		other.hungerBar_ = nullptr;
+	}
+	Movable&	operator=(Movable&&	other)
+	{
+		if (this != &other) {
+			delete data_;
+			data_ = nullptr;
+			std::swap(other.data_, data_);
+		}
+		return	*this;
+	}*/
+
 	/*template<typename T>
 	void eat(Actor* actor)
 	{ 
@@ -42,9 +61,14 @@ public:
 	
 	virtual bool increaseHunger()
 	{
+		// increase hunger
 		hungerBar_++;
+		
+		// return true if hunger reaches 10
 		if (hungerBar_ >= 10)
+		{
 			return true;
+		}
 		return false;
 	}
 	
