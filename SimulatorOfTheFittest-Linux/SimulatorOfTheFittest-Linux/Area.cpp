@@ -38,10 +38,15 @@ Area::Area()
 
 Area::~Area()
 {
-	for (int i = 0; i < actors_.size(); i++)
+	/*for (int i = 0; i < actors_.size(); i++)
 	{
 		delete actors_[i];
-	}
+	}*/
+
+	/*for (auto it = actors_.begin(); it != actors_.end(); it++)
+	{
+		delete *it;
+	}*/
 }
 
 std::string Area::getName() const
@@ -96,6 +101,93 @@ void Area::printAllActors()
 void Area::act()
 {
 	// create an iterator that proints to the end of the vetor
+	auto end = actors_.end();
+
+	// set hasEaten to false for all animals
+	std::for_each(actors_.begin(), end, [](Actor* a)
+	{
+		if (myHelper::IsType<Animal, Actor>(a))
+		{
+			static_cast<Animal*>(a)->setHasEaten(false);
+		}
+	});
+
+	// loop through the vector
+	for (auto it = actors_.begin(); it != end; it++)
+	{
+		if (myHelper::IsType<Carnivore, Actor>(*it))
+		{
+			//std::cout << (*it)->getName() << ".action()" << std::endl;
+			std::cout << "Carnivore.action()" << std::endl;
+
+			// see if there are any herbivores in the vector
+			auto herb = std::find_if(actors_.begin(), actors_.end(), [](Actor *a)
+			{
+				//return a->getName() == "Herbivore";
+				return myHelper::IsType<Herbivore, Actor>(a);
+			});
+
+			if (herb == actors_.end())
+			{
+				// count hungerBar up, and erase if it hits max
+				if (static_cast<Carnivore*>(*it)->increaseHunger())
+				{
+					// erase the carnivore from the vector
+					it = actors_.erase(it);
+				}			
+			}
+			else
+			{
+				// erase the herbivore from the vector
+				herb = actors_.erase(herb);
+				// update hunger and hasEaten
+				static_cast<Carnivore*>(*it)->eat();
+				// update iterators
+				end = actors_.end();
+				it += (it > herb ? 1 : 0);
+			}
+		}
+		else if (myHelper::IsType<Herbivore, Actor>(*it))
+		{
+			//std::cout << (*it)->getName() << ".action()" << std::endl;
+			std::cout << "Herbivore.action()" << std::endl;
+
+			// see if there are any plants in the vector
+			auto plant = std::find_if(actors_.begin(), actors_.end(), [](Actor *a)
+			{
+				//return a->getName() == "Plant";
+				return myHelper::IsType<Plant, Actor>(a);
+			});
+
+			if (plant == actors_.end())
+			{
+				// count hungerBar up, and erase if it hits max
+				if (static_cast<Herbivore*>(*it)->increaseHunger())
+				{
+					// erase the carnivore from the vector
+					it = actors_.erase(it);
+				}
+			}
+			else
+			{
+				// erase the herbivore from the vector
+				plant = actors_.erase(plant);
+				// update hunger and hasEaten
+				static_cast<Herbivore*>(*it)->eat();
+	
+				// update iterators
+				end = actors_.end();
+				it += (it > plant ? 1 : 0);
+			}
+		}
+		else if (myHelper::IsType<Plant, Actor>(*it))
+		{
+			//std::cout << (*it)->getName() << ".action()" << std::endl;
+			std::cout << "Plant.action()" << std::endl;
+		}
+	}
+	
+	/*// create an iterator that proints to the end of the vetor
 	auto end = actors_.end();
 
 	// set hasEaten to false for all animals
@@ -181,7 +273,7 @@ void Area::act()
 		{
 			std::cout << (*it)->getName() << ".action()" << std::endl;
 		}
-	}
+	}*/
 
 	//std::for_each(actors_.begin(), actors_.end(), [=](Actor *a){ a->action(&actors_); });
 

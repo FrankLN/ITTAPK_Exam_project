@@ -15,9 +15,8 @@ protected:
 public:
 	virtual bool hasEaten(){ return hasEaten_; }
 	
-	template<typename T>
+	/*template<typename T>
 	void eat(Actor* actor)
-	virtual void eat(Actor* actor)
 	{ 
 		std::string result = "someting";
 		if (myHelper::IsType<T, Actor>(actor))
@@ -30,12 +29,13 @@ public:
 		std::cout << "I ate " << result << " and i liked it" << std::endl;
 		hungerBar_--;
 		hasEaten_ = true;
-	}
-	/*virtual void eat()
+	}*/
+	//virtual void eat(Actor* actor)
+	virtual void eat()
 	{
 		hungerBar_--;
 		hasEaten_ = true;
-	}*/
+	}
 	virtual void setHasEaten(bool c)
 	{
 		hasEaten_ = c;

@@ -93,7 +93,8 @@ public:
 
 				for (auto it = actors->begin(); it != actors->end(); it++)
 				{
-					if ((*it)->getName() != "Plant")
+					//if ((*it)->getName() != "Plant")
+					if (myHelper::IsType<Plant, Actor>(*it) == false)
 					{
 						auto a = static_cast<Animal*>(*it);
 						if (a->getHasEaten() == false && a->getHasMoved() == false)
