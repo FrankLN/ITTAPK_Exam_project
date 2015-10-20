@@ -37,14 +37,32 @@ int main()
 	
 	test = myHelper::IsType<Herbivore, Actor>(aPtr);
 	std::cout << test << std::endl;*/
-	WorldMap<Area, 25> wm = WorldMap<Area, 25>();
+	/*WorldMap<Area, 25> wm = WorldMap<Area, 25>();
 
 	for (int i = 0; i < 1000; i++)
 		wm.actAll();
 
 	sig1(wm.getAllActors());
-
+	*/
+	
 	//start();	
+
+	//WorldMap<Area, 1, 2> wm = WorldMap<Area, 1, 2>();
+
+	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
+	wm.printAll();
+	wm.actAll();
+
+
+	/*
+	ActorTypeList<Plant, ActorTypeList<Herbivore, NullType>> aTL;
+
+	std::cout << " " << std::endl;
+
+	Simulator mySimulator;
+	mySimulator.initiate();
+	*/
+	
 	return 0;
 }
 

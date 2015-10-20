@@ -4,6 +4,8 @@
 #include "Area.h"
 #include "SharedHelperFunctions.h"
 
+#define chance 60
+
 Area::Area()
 {
 	std::random_device rd;
@@ -59,25 +61,33 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	while (rand() % 100 < 70)
+	// for testing
+	/*actors_.push_back(new Carnivore(950 + rand() % 100));
+	actors_.push_back(new Herbivore(950 + rand() % 100));
+	actors_.push_back(new Herbivore(950 + rand() % 100));
+	actors_.push_back(new Plant(rand() % 100));*/
+
+	/*
+	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Plant(rand() % 100));
 	}
-	while (rand() % 100 < 70)
+	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Carnivore(950 + rand() % 100));
 	}
-	while (rand() % 100 < 70)
+	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Herbivore(950 + rand() % 100));
 	}
+	*/
 }
 
 void Area::printAllActors()
 {
-	for (int i = 0; i < actors_.size(); i++)
+	for (auto &a : actors_)
 	{
-		actors_[i]->show();
+		a->show();
 	}
 }
 
@@ -92,94 +102,95 @@ std::vector<Actor*> Area::getAllActors()
 }
 
 void Area::act()
-{	
-	//std::cout << "<<<Before act>>>" << std::endl;
-	//printAllActors();
+{
+	// print all actors
+	printAllActors();
 	
-	size_t s = actors_.size();
-	
-	for(int i=0; i<s; i++)
+	// create an iterator that points to the end of the vector
+	auto end = actors_.end();
+
+	// set hasEaten and hasMoved to false for all animals
+	std::for_each(actors_.begin(), end, [](Actor* a)
 	{
-		if(myHelper::IsType<Herbivore, Actor>(actors_[i]))
+		if (myHelper::IsType<Animal, Actor>(a))
 		{
-			for (int j = 0; j < s; j++)
+			static_cast<Animal*>(a)->setHasEaten(false);
+			static_cast<Animal*>(a)->setHasMoved(false);
+		}
+	});
+
+	// loop through the vector
+	for (auto it = actors_.begin(); it != end; it++)
+	{
+		if (myHelper::IsType<Carnivore, Actor>(*it))
+		{
+			// see if there are any herbivores in the vector
+			auto herb = std::find_if(actors_.begin(), actors_.end(), [](Actor *a)
 			{
-				if (myHelper::IsType<Carnivore, Actor>(actors_[j]))
+				return myHelper::IsType<Herbivore, Actor>(a);
+			});
+
+			if (herb == actors_.end())
+			{
+				// count hungerBar up, and erase if it hits max
+				if (static_cast<Carnivore*>(*it)->increaseHunger())
 				{
-					Carnivore* temp = dynamic_cast<Carnivore*>(actors_[j]);
-					if (!temp->hasEaten())
-					{
-						temp->eat<Herbivore>(actors_[i]);
-						delete actors_[i];
-						actors_.erase(actors_.begin() + i);
-						s = actors_.size();
-						i--;
-						break;
-					}
+					// erase the carnivore from the vector
+					it = actors_.erase(it);
+				}			
+			}
+			else
+			{
+				// erase the herbivore from the vector
+				herb = actors_.erase(herb);
+				// update hunger and hasEaten
+				static_cast<Carnivore*>(*it)->eat();
+				// update iterators
+				end = actors_.end();
+				it += (it > herb ? 1 : 0);
+			}
+		}
+		else if (myHelper::IsType<Herbivore, Actor>(*it))
+		{
+			// see if there are any plants in the vector
+			auto plant = std::find_if(actors_.begin(), actors_.end(), [](Actor *a)
+			{
+				return myHelper::IsType<Plant, Actor>(a);
+			});
+
+			if (plant == actors_.end())
+			{
+				// count hungerBar up, and erase if it hits max
+				if (static_cast<Herbivore*>(*it)->increaseHunger())
+				{
+					// erase the carnivore from the vector
+					it = actors_.erase(it);
 				}
 			}
-		}
-		else if (myHelper::IsType<Plant, Actor>(actors_[i]))
-		{
-			for(int j=i; j<s; j++)
+			else
 			{
-				if (myHelper::IsType<Herbivore, Actor>(actors_[j]))
-				{
-					Herbivore* temp = dynamic_cast<Herbivore*>(actors_[j]);
-					if (!temp->hasEaten())
-					{
-						temp->eat<Plant>(actors_[i]);
-						actors_.erase(actors_.begin() + i);
-						s = actors_.size();
-						i--;
-						break;
-					}
-				}
+				// erase the herbivore from the vector
+				plant = actors_.erase(plant);
+				// update hunger and hasEaten
+				static_cast<Herbivore*>(*it)->eat();
+				// update iterators
+				end = actors_.end();
+				it += (it > plant ? 1 : 0);
 			}
+		}
+		else if (myHelper::IsType<Plant, Actor>(*it))
+		{
+			int dummy = 1;
 		}
 	}
-
-
 	
-	for (int i = 0; i < s; i++)
-	{
-		actors_[i]->incAge();
-		if (!myHelper::IsType<Plant, Actor>(actors_[i]))
-		{
-			Animal* temp  = dynamic_cast<Animal*>(actors_[i]);
-			temp->setHasEaten(false);
-			if (temp->increaseHunger())
-			{
-				actors_.erase(actors_.begin() + i);
-				s = actors_.size();
-				i--;
-			}
-				
-		}
-	}
-
-	/*int i = 0;
-	std::for_each(actors_.begin(), actors_.end(), [this, &i](Actor* actor)
-	{
-		actor->incAge();
-		if (!myHelper::IsType<Plant, Actor>(actor))
-		{
-			Animal* temp = dynamic_cast<Animal*>(actor);
-			temp->setHasEaten(false);
-			if (temp->increaseHunger())
-			{
-				actors_.erase(actors_.begin() + i);
-			}
-		}
-		i++;
-	});*/
-	
-	
-	//std::cout << "<<<After act>>>" << std::endl;
-	//printAllActors();
-	
-	
-	//std::cout << "<<<New generates>>>" << std::endl;
+	// generate new actors and print all actors
 	generateRandomActors();
-	//printAllActors();
+	printAllActors();
+
+}
+
+std::vector<Actor*> *Area::getActors()
+{
+	return &actors_;
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <string>
+#include <vector>
 
 #include "Animal.h"
 

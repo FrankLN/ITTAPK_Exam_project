@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <typeinfo>
-
+#include <vector>
 #include "Animal.h"
 
 class Herbivore : public Animal

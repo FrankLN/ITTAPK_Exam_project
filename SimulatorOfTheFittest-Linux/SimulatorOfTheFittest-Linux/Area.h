@@ -29,6 +29,7 @@ public:
 	void printAllActors();
 	void act();
 	std::vector<Actor*> getAllActors();
+	std::vector<Actor*> *getActors();
 };
 
 inline std::ostream & operator<<(std::ostream & Str, Area const & v) {

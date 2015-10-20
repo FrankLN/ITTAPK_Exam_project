@@ -2,6 +2,7 @@
 #define	ACTOR_H
 
 #include <string>
+#include <vector>
 
 class Actor
 {
