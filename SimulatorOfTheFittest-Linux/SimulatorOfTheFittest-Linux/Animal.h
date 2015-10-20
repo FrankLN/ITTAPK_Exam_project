@@ -35,6 +35,11 @@ public:
 	{
 		hungerBar_--;
 		hasEaten_ = true;
+	}*/
+	virtual void eat()
+	{
+		hungerBar_--;
+		hasEaten_ = true;
 	}
 	virtual void setHasEaten(bool c)
 	{

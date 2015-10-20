@@ -78,11 +78,15 @@
     <ClInclude Include="ActorTypeList.h">
       <Filter>Header files</Filter>
     </ClInclude>
+<<<<<<< HEAD
 <<<<<<< 0b071b1a946db9f2b2f00224cb0501d39077935c
     <ClInclude Include="SharedHelperFunctions.h">
 =======
     <ClInclude Include="Log.h">
 >>>>>>> testin stuff
+=======
+    <ClInclude Include="Log.h">
+>>>>>>> 2cf2e141794e9d59d911cae2658cf6246c2c3629
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

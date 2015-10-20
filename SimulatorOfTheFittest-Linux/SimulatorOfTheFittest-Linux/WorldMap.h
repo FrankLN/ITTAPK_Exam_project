@@ -93,7 +93,6 @@ public:
 
 				for (auto it = actors->begin(); it != actors->end(); it++)
 				{
-					//if ((*it)->getName() != "Plant")
 					if (myHelper::IsType<Plant, Actor>(*it) == false)
 					{
 						auto a = static_cast<Animal*>(*it);
@@ -134,5 +133,7 @@ struct GetWorldMap
 		return new WorldMap<Area, 1>();
 	}
 };
+
+
 
 #endif

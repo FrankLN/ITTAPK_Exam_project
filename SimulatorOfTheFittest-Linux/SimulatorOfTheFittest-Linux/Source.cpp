@@ -37,7 +37,6 @@ int main()
 	//WorldMap<Area, 1, 2> wm = WorldMap<Area, 1, 2>();
 
 	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
-
 	wm.printAll();
 	wm.actAll();
 
