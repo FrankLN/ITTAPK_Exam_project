@@ -8,14 +8,24 @@
 
 struct ResultToConsole
 {
-	void operator()(std::vector<Actor*> actors) const { actors[0]->show(); }
+	void operator()(std::vector<Actor*> actors) const
+	{
+		for (int i = 0; i < actors.size(); i++)
+		{
+			actors[0]->show();
+		}
+		
+	}
 };
 
 struct ResultToFile
 {
 	void operator()(std::vector<Actor*> actors) const 
 	{ 
-		actors[0]->show(); 
+		for (int i = 0; i < actors.size(); i++)
+		{
+			actors[0]->show();
+		}
 	}
 };
 
