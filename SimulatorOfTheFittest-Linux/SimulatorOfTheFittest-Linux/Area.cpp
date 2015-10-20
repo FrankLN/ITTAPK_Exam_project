@@ -106,7 +106,6 @@ void Area::act()
 	// set hasEaten to false for all animals
 	std::for_each(actors_.begin(), end, [](Actor* a)
 	{
-<<<<<<< HEAD
 		if (myHelper::IsType<Animal, Actor>(a))
 		{
 			static_cast<Animal*>(a)->setHasEaten(false);
@@ -194,8 +193,6 @@ void Area::act()
 	// set hasEaten to false for all animals
 	std::for_each(actors_.begin(), end, [](Actor* a)
 	{
-=======
->>>>>>> 2cf2e141794e9d59d911cae2658cf6246c2c3629
 		if (a->getName() != "Plant")
 		{
 			static_cast<Animal*>(a)->setHasEaten(false);
@@ -276,11 +273,7 @@ void Area::act()
 		{
 			std::cout << (*it)->getName() << ".action()" << std::endl;
 		}
-<<<<<<< HEAD
 	}*/
-=======
-	}
->>>>>>> 2cf2e141794e9d59d911cae2658cf6246c2c3629
 
 	//std::for_each(actors_.begin(), actors_.end(), [=](Actor *a){ a->action(&actors_); });
 
@@ -356,23 +349,8 @@ void Area::act()
 	generateRandomActors();
 	printAllActors();
 	*/
-<<<<<<< HEAD
 }
 
-void Area::move()
-{
-	
-}
-
-=======
-}
-
-void Area::move()
-{
-	
-}
-
->>>>>>> 2cf2e141794e9d59d911cae2658cf6246c2c3629
 std::vector<Actor*> *Area::getActors()
 {
 	return &actors_;
