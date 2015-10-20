@@ -9,124 +9,148 @@
 #include "Simulation.cpp"
 #include <boost/smart_ptr.hpp>
 #include <boost/signals2.hpp>
-#include "SharedHelperFunctions.h"
+//#include "SharedHelperFunctions.h"
 
 void start();
 
+void setupMap(const int&, const int&);
+
 int main()
 {
-	boost::signals2::signal<void(std::vector<Actor*>)> sig1;
-	sig1.connect(ResultToConsole());
-	sig1.connect(ResultToFile());
+	WorldMapHolder* wm;
+	Simulator mySimulator;
+	int x, y;
 
-	//WorldMapHolder* ptr = new WorldMap<Area, 1>();
-	//
-	//ptr->actAll();
-	//std::cout << std::endl;
-	//
-	//ptr = new WorldMap<Area, 2>();
-	//
-	//ptr->actAll();
-		
-	/*Actor* aPtr;
-	
-	aPtr = new Plant(10);
-	
-	bool test = myHelper::IsType<Plant, Actor>(aPtr);	
-	std::cout << test << std::endl;
-	
-	test = myHelper::IsType<Herbivore, Actor>(aPtr);
-	std::cout << test << std::endl;*/
-	WorldMap<Area, 25> wm = WorldMap<Area, 25>();
+	// State: SimulatorSetup
+	mySimulator.initiate();
+	setupMap(x, y);
 
-	for (int i = 0; i < 1000; i++)
-		wm.actAll();
 
-	sig1(wm.getAllActors());
 
-	//start();	
+
+
+
+	// State: Running
+	mySimulator.process_event(EvStart());
+
+	while (!myHelpers::kbhit<Actor>())
+	{
+		std::cout << "Waiting for interrupt" << std::endl;
+	}
+	// State: Pause
+	mySimulator.process_event(EvPauseRun());
+
+
+
 	return 0;
 }
 
-void start()
+void setupMap(const int& x, const int& y)
 {
-	Simulator mySimulator;
-	bool finish = false;
-	bool quit = false;
-	bool reset = false;
+	std::string input;
+	std::cout << "Please insert size of map: ";
+	std::cin >> input;
 
+	if (input.find_first_not_of("0123456789 "))
+		input = "0";
 
+	std::vector<std::string> elem;
+	std::split(input, " ", elem);
 
-	while (!finish && !quit)
+	switch (elem.size())
 	{
-		finish = true;
-		for(int i = 0; i < 20 ; i++) std::cout << std::endl;
-		std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-		std::cout << "<=----------------Main menu--------------=>" << std::endl;
-		std::cout << "<=-----------------1. Start--------------=>" << std::endl;
-		std::cout << "<=-----------------2. Quit---------------=>" << std::endl;
-		std::cout << "<=--Select option: ";
-
-
-		int option;
-		std::cin >> option;
-		std::string str;
-		std::getline(std::cin, str);
-
-		switch (option)
-		{
-		case 1:
-			for (int i = 0; i < 20; i++) std::cout << std::endl;
-			mySimulator.initiate();
-
-			for (int i = 0; i < 20; i++) std::cout << std::endl;
-			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-			mySimulator.process_event(EvStart());
-			break;
-		case 2:
-			quit = true;
-			break;
-		default:
-			finish = false;
-		}
+	case 1:
+		*x = std::stoi(input);
+		*y = *x;
+		break;
+	case 2:
+		*x = std::stoi(elem[0]);
+		*y = std::stoi(elem[1]);
+		break;
+	default:
+		setupMap(x, y);
 	}
-
-	while (!quit && !reset)
-	{
-		std::cout << "<=-----------------1. Quit---------------=>" << std::endl;
-		std::cout << "<=-----------------2. Pause/Resume-------=>" << std::endl;
-		std::cout << "<=-----------------3. Reset--------------=>" << std::endl;
-		std::cout << "<=-----------------4. Toggle log---------=>" << std::endl;
-		std::cout << "<=--Select option: ";
-
-		int option;
-		std::cin >> option;
-		std::string str;
-		std::getline(std::cin, str);
-
-		switch (option)
-		{
-		case 1:
-			quit = true;
-			break;
-		case 2:
-			for (int i = 0; i < 20; i++) std::cout << std::endl;
-			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-			mySimulator.process_event(EvPauseRun());
-			break;
-		case 3:
-			reset = true;
-			break;
-		case 4:
-			for (int i = 0; i < 20; i++) std::cout << std::endl;
-			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-			mySimulator.process_event(EvLogOnOff());
-			break;
-
-		}
-	}
-
-
-	if (reset)
-		start();
 }
+
+//void start()
+//{
+//	Simulator mySimulator;
+//	bool finish = false;
+//	bool quit = false;
+//	bool reset = false;
+//
+//
+//
+//	while (!finish && !quit)
+//	{
+//		finish = true;
+//		for(int i = 0; i < 20 ; i++) std::cout << std::endl;
+//		std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
+//		std::cout << "<=----------------Main menu--------------=>" << std::endl;
+//		std::cout << "<=-----------------1. Start--------------=>" << std::endl;
+//		std::cout << "<=-----------------2. Quit---------------=>" << std::endl;
+//		std::cout << "<=--Select option: ";
+//
+//
+//		int option;
+//		std::cin >> option;
+//		std::string str;
+//		std::getline(std::cin, str);
+//
+//		switch (option)
+//		{
+//		case 1:
+//			for (int i = 0; i < 20; i++) std::cout << std::endl;
+//			mySimulator.initiate();
+//
+//			for (int i = 0; i < 20; i++) std::cout << std::endl;
+//			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
+//			mySimulator.process_event(EvStart());
+//			break;
+//		case 2:
+//			quit = true;
+//			break;
+//		default:
+//			finish = false;
+//		}
+//	}
+//
+//	while (!quit && !reset)
+//	{
+//		std::cout << "<=-----------------1. Quit---------------=>" << std::endl;
+//		std::cout << "<=-----------------2. Pause/Resume-------=>" << std::endl;
+//		std::cout << "<=-----------------3. Reset--------------=>" << std::endl;
+//		std::cout << "<=-----------------4. Toggle log---------=>" << std::endl;
+//		std::cout << "<=--Select option: ";
+//
+//		int option;
+//		std::cin >> option;
+//		std::string str;
+//		std::getline(std::cin, str);
+//
+//		switch (option)
+//		{
+//		case 1:
+//			quit = true;
+//			break;
+//		case 2:
+//			for (int i = 0; i < 20; i++) std::cout << std::endl;
+//			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
+//			mySimulator.process_event(EvPauseRun());
+//			break;
+//		case 3:
+//			reset = true;
+//			break;
+//		case 4:
+//			for (int i = 0; i < 20; i++) std::cout << std::endl;
+//			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
+//			mySimulator.process_event(EvLogOnOff());
+//			break;
+//
+//		}
+//	}
+//
+//
+//	if (reset)
+//		start();
+//}
