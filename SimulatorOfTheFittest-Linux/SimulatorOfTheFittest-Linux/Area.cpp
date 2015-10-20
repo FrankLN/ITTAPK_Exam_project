@@ -141,7 +141,7 @@ void Area::act()
 
 
 	
-	/*for (int i = 0; i < s; i++)
+	for (int i = 0; i < s; i++)
 	{
 		actors_[i]->incAge();
 		if (!myHelper::IsType<Plant, Actor>(actors_[i]))
@@ -156,9 +156,9 @@ void Area::act()
 			}
 				
 		}
-	}*/
+	}
 
-	int i = 0;
+	/*int i = 0;
 	std::for_each(actors_.begin(), actors_.end(), [this, &i](Actor* actor)
 	{
 		actor->incAge();
@@ -172,7 +172,7 @@ void Area::act()
 			}
 		}
 		i++;
-	});
+	});*/
 	
 	
 	//std::cout << "<<<After act>>>" << std::endl;

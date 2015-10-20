@@ -5,7 +5,7 @@
 
 #VisualGDB: AutoSourceFiles		#<--- remove this line to disable auto-updating of SOURCEFILES and EXTERNAL_LIBS
 
-TARGETNAME := SimulatorOfTheFittest-Linux
+TARGETNAME := SimulatorOfTheFittest-Linux.
 #TARGETTYPE can be APP, STATIC or SHARED
 TARGETTYPE := APP
 

@@ -8,7 +8,6 @@
 #include "Area.h"
 #include "Simulation.cpp"
 #include <boost/smart_ptr.hpp>
-#include <thread>
 #include <boost/signals2.hpp>
 #include "SharedHelperFunctions.h"
 
@@ -38,26 +37,15 @@ int main()
 	
 	test = myHelper::IsType<Herbivore, Actor>(aPtr);
 	std::cout << test << std::endl;*/
-<<<<<<< HEAD
+	WorldMap<Area, 25> wm = WorldMap<Area, 25>();
 
-	std::vector<Actor*> myVector;
-	myVector.push_back(new Plant(rand() % 100));
+	for (int i = 0; i < 1000; i++)
+		wm.actAll();
 
-	sig1(myVector);
+	sig1(wm.getAllActors());
 
-	start();	
-
-=======
-	
-	//start();
-
-	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
-
-	auto actors = wm.getAllActors();
-	
->>>>>>> e76866b6eb320ae8271023d9f5c24ba3fd69150b
+	//start();	
 	return 0;
-
 }
 
 void start()
