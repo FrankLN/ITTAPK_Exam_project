@@ -2,7 +2,7 @@
 
 Plant::Plant(float mass)
 {
-
+	age_ = 0;
 }
 
 Plant::~Plant()
@@ -12,5 +12,10 @@ Plant::~Plant()
 
 void Plant::show()
 {
-	std::cout << "I'm a Plant" << std::endl;
+	std::cout << "Actor:\tPlant" << std::endl << "Age:\t" << age_ << std::endl << std::endl;
+}
+
+std::string Plant::showToString()
+{
+	return "Actor:\tPlant\nAge:\t" + age_;
 }

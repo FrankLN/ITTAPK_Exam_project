@@ -38,6 +38,7 @@ int main()
 	
 	test = myHelper::IsType<Herbivore, Actor>(aPtr);
 	std::cout << test << std::endl;*/
+<<<<<<< HEAD
 
 	std::vector<Actor*> myVector;
 	myVector.push_back(new Plant(rand() % 100));
@@ -46,6 +47,15 @@ int main()
 
 	start();	
 
+=======
+	
+	//start();
+
+	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
+
+	auto actors = wm.getAllActors();
+	
+>>>>>>> e76866b6eb320ae8271023d9f5c24ba3fd69150b
 	return 0;
 
 }
