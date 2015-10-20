@@ -36,19 +36,7 @@ int main()
 
 	WorldMap<Area, 2> wm = WorldMap<Area, 2>();
 
-	wm.actAll();
-	wm.actAll();
-	wm.actAll();
-	wm.actAll();
-	wm.actAll();
-	wm.actAll();
-	wm.actAll();
-	wm.actAll();
-	
-
-	std::cout << "----------------------------------" << std::endl;
-
-	wm.printAllActors();
+	auto actors = wm.getAllActors();
 	
 	return 0;
 }

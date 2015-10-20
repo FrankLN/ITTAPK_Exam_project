@@ -13,6 +13,7 @@ public:
 	~Herbivore();
 
 	void show();
+	std::string showToString();
 };
 
 #endif

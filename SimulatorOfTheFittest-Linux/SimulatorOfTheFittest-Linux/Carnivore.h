@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <typeinfo>
+#include <string>
 
 #include "Animal.h"
 
@@ -13,6 +14,7 @@ public:
 	~Carnivore();
 
 	void show();
+	std::string showToString();
 };
 
 #endif

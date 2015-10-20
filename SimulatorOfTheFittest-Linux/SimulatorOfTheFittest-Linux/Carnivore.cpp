@@ -19,5 +19,11 @@ void Carnivore::show()
 
 std::string Carnivore::showToString()
 {
-	return "Actor:\tCarnivore\nAge:\t" + age_ + "\nHunger:\t" + hungerBar_ + " out of 10(where 10 is dead of hunger)";
+	std::string result = "Actor:\tCarnivore\nAge:\t";
+	result += age_;
+	result += "\nHunger:\t";
+	result += hungerBar_;
+	result += " out of 10(where 10 is dead of hunger)";
+
+	return result;
 }

@@ -19,5 +19,11 @@ void Herbivore::show()
 
 std::string Herbivore::showToString()
 {
-	std::cout << return "Actor:\tHerbivore\nAge:\t" + age_ + "\nHunger:\t" + hungerBar_ + " out of 10(where 10 is dead of hunger)";
+	std::string result = "Actor:\tHerbivore\nAge:\t";
+	result += age_;
+	result += "\nHunger:\t";
+	result += hungerBar_;
+	result += " out of 10(where 10 is dead of hunger)";
+
+	return result;
 }

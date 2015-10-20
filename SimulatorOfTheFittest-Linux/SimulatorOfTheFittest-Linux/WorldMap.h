@@ -72,6 +72,20 @@ public:
 			}
 		}
 	}
+
+	std::vector<Actor*> getAllActors()
+	{
+		std::vector<Actor*> result = std::vector<Actor*>();
+		for (int i = 0; i < X; i++)
+		{
+			for (int j = 0; j < Y; j++)
+			{
+				std::vector<Actor*> temp = data_[i][j].getAllActors();
+				result.insert(result.end(), temp.begin(), temp.end());
+			}
+		}
+		return result;
+	}
 private:
 	Area data_[X][Y];
 };

@@ -81,6 +81,16 @@ void Area::printAllActors()
 	}
 }
 
+std::vector<Actor*> Area::getAllActors()
+{
+	std::vector<Actor*> result = std::vector<Actor*>();
+	for (auto it = actors_.begin(); it != actors_.end(); it++)
+	{
+		result.push_back(*it);
+	}
+	return result;
+}
+
 void Area::act()
 {	
 	//std::cout << "<<<Before act>>>" << std::endl;
