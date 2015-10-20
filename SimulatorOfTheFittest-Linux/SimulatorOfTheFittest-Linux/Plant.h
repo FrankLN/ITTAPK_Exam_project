@@ -4,6 +4,8 @@
 #include <iostream>
 #include <typeinfo>
 #include <boost/signals2.hpp>
+#include <vector>
+
 #include "Actor.h"
 
 class Plant : public Actor

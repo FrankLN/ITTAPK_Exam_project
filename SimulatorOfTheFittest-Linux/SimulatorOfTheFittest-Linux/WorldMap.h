@@ -2,8 +2,10 @@
 #define WORLD_MAP_H
 
 #include <iostream>
-#include "Area.h"
+#include <array>
+#include <vector>
 #include <typeinfo>
+#include "Area.h"
 
 class WorldMapHolder
 {
@@ -27,13 +29,16 @@ public:
 			}
 		}
 	}
-
 	void actAll()
 	{
 		std::cout << "actAll is not available for this type: " << typeid(T).name() << std::endl;
 	}
+	void move() 
+	{
+
+	}
 private:
-	T data_[X][Y];
+	std::array<std::array<T, X>, Y> data_{};
 };
 
 template<size_t X, size_t Y>
@@ -42,52 +47,120 @@ class WorldMap<Area, X, Y> : public WorldMapHolder
 public:	
 	void printAll()
 	{
-		for (int i = 0; i < X; i++)
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				std::cout << data_[i][j] << std::endl;
+				std::cout << *area << std::endl;
 			}
 		}
 	}
 
 	void actAll()
 	{
-		for (int i = 0; i < X; i++)
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				data_[i][j].act();
+				area->act();
+			}
+		}
+	}
+
+	void moveAll()
+	{
+		for (auto row = data_.begin(); row != data_.end(); row++)
+		{
+			for (auto area = row->begin(); area != row->end(); area++)
+			{
+				area->printAllActors();
+				std::cout << "------------------------------------------" << std::endl;
+
+				// get actor array from current area
+				std::vector<Actor*>* actors = area->getActors();
+				// get end of actor vector
+				auto end = actors->end();
+
+				for (auto it = actors->begin(); it != actors->end(); )
+				{
+					if (myHelper::IsType<Plant, Actor>(*it) == false)
+					{
+						auto a = static_cast<Animal*>(*it);
+						if ((a->getHasEaten() == false) && (a->getHasMoved() == false))
+						{
+							a->setHasMoved(true);
+
+							if (std::next(area) != row->end())
+							{
+								// move animal to next array in current row
+								std::next(area)->getActors()->push_back(std::move(a));
+							}
+							else
+							{
+								if (std::next(row) != data_.end())
+								{
+									// move animal to first array in next row
+									std::next(row)->begin()->getActors()->push_back(std::move(a));
+								}
+								else
+								{
+									// move animal to first area in first row
+									data_.begin()->begin()->getActors()->push_back(std::move(a));
+								}
+							}
+							// erase animal from current area
+							it = actors->erase(it);
+						}
+						else
+						{
+							// increment iterator
+							it++;
+						}
+					}
+					else
+					{
+						// increment iterator
+						it++;
+					}
+				}
+
+				area->printAllActors();
+				std::cout << "------------------------------------------" << std::endl;
+
 			}
 		}
 	}
 
 	void printAllActors()
 	{
-		for (int i = 0; i < X; i++)
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				data_[i][j].printAllActors();
+				area->printAllActors();
 			}
 		}
+
 	}
 
 	std::vector<Actor*> getAllActors()
 	{
-		std::vector<Actor*> result = std::vector<Actor*>();
-		for (int i = 0; i < X; i++)
+		// create an empty vector to add all actos to
+		auto result = std::vector<Actor*>();
+		// add actors
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				std::vector<Actor*> temp = data_[i][j].getAllActors();
+				auto temp = area->getAllActors();
 				result.insert(result.end(), temp.begin(), temp.end());
 			}
 		}
+
 		return result;
 	}
 private:
-	Area data_[X][Y];
+	std::array<std::array<Area, X>, Y> data_{};
 };
 
 struct GetWorldMap
