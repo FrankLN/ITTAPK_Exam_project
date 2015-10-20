@@ -17,5 +17,5 @@ void Plant::show()
 
 std::string Plant::showToString()
 {
-	return "Actor:\tPlant\nAge:\t" + age_;
+	return "Actor:\tPlant\nAge:\t" + std::to_string(age_);
 }

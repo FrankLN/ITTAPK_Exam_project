@@ -34,6 +34,7 @@ struct ResultToFile
 	{ 
 		if (!actors.empty())
 		{
+			auto oldest = actors.begin();
 			std::string logstr;
 			logstr.append("Actors left:");
 
@@ -41,7 +42,17 @@ struct ResultToFile
 			{
 				logstr.append("\n\n");
 				logstr.append((*it)->showToString());
+				if ((*it)->getAge() > (*oldest)->getAge())
+					oldest = it;
 			}
+
+			logstr.append("\n\n");
+			logstr.append("Total number of actors: ");
+			logstr.append(std::to_string(actors.size()));
+			logstr.append("\n");
+			logstr.append("Oldest actor: \n");
+			logstr.append((*oldest)->showToString());
+
 
 			std::ofstream myfile;
 			myfile.open("log.txt");
