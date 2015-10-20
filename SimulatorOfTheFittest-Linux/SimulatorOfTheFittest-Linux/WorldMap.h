@@ -38,7 +38,6 @@ public:
 
 	}
 private:
-	//T data_[X][Y];
 	std::array<std::array<T, X>, Y> data_{};
 };
 
@@ -48,40 +47,28 @@ class WorldMap<Area, X, Y> : public WorldMapHolder
 public:	
 	void printAll()
 	{
-		/*for (int i = 0; i < X; i++)
-		{
-			for (int j = 0; j < Y; j++)
-			{
-				std::cout << data_[i][j] << std::endl;
-			}
-		}*/
 		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
 			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				std::cout << area << std::endl;
+				std::cout << *area << std::endl;
 			}
 		}
 	}
+
 	void actAll()
 	{
-		for (int i = 0; i < X; i++)
+		for (auto row = data_.begin(); row != data_.end(); row++)
 		{
-			for (int j = 0; j < Y; j++)
+			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				data_[i][j].act();
+				area->act();
 			}
 		}
+
 		move();
-		for (auto rows = data_.begin(); rows != data_.end(); rows++)
-		{
-			for (auto area = rows->begin(); area != rows->end(); area++)
-			{
-				area->printAllActors();
-				std::cout << std::endl;
-			}
-		}
 	}
+
 	void move()
 	{
 		for (auto row = data_.begin(); row != data_.end(); row++)
@@ -122,7 +109,6 @@ public:
 		}
 	}
 private:
-	//Area data_[X][Y];
 	std::array<std::array<Area, X>, Y> data_{};
 };
 
@@ -133,7 +119,5 @@ struct GetWorldMap
 		return new WorldMap<Area, 1>();
 	}
 };
-
-
 
 #endif

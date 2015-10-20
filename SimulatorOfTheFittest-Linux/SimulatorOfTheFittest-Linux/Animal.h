@@ -13,8 +13,6 @@ protected:
 	bool hasEaten_;
 	int hungerBar_;
 public:
-	virtual bool hasEaten(){ return hasEaten_; }
-	
 	/*template<typename T>
 	void eat(Actor* actor)
 	{ 
@@ -30,16 +28,18 @@ public:
 		hungerBar_--;
 		hasEaten_ = true;
 	}*/
-	//virtual void eat(Actor* actor)
+
 	virtual void eat()
 	{
 		hungerBar_--;
 		hasEaten_ = true;
 	}
+	
 	virtual void setHasEaten(bool c)
 	{
 		hasEaten_ = c;
 	}
+	
 	virtual bool increaseHunger()
 	{
 		hungerBar_++;
@@ -47,14 +47,17 @@ public:
 			return true;
 		return false;
 	}
+	
 	virtual bool getHasEaten()
 	{
 		return hasEaten_;
 	}
+	
 	virtual bool getHasMoved()
 	{
 		return hasMoved_;
 	}
+	
 	virtual void setHasMoved(bool c)
 	{
 		hasMoved_ = c;
