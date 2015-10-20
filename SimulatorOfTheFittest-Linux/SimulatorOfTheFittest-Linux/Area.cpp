@@ -4,7 +4,7 @@
 #include "Area.h"
 #include "SharedHelperFunctions.h"
 
-#define chance 60
+#define chance 10
 
 Area::Area()
 {
@@ -38,12 +38,12 @@ Area::Area()
 
 Area::~Area()
 {
-	for (auto it = actors_.begin(); it != actors_.end(); it++)
+	/*for (auto it = actors_.begin(); it != actors_.end(); it++)
 	{
 		delete (*it);
 	}
 
-	actors_.clear();
+	actors_.clear();*/
 }
 
 std::string Area::getName() const
@@ -63,13 +63,8 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	// for testing
-	actors_.push_back(new Herbivore(950 + rand() % 100));
-	actors_.push_back(new Herbivore(950 + rand() % 100));
-	actors_.push_back(new Carnivore(950 + rand() % 100));
-	actors_.push_back(new Plant(rand() % 100));
 
-	/*
+	
 	while (rand() % 100 < chance)
 	{
 		actors_.push_back(new Plant(rand() % 100));
@@ -82,7 +77,7 @@ void Area::generateRandomActors()
 	{
 		actors_.push_back(new Herbivore(950 + rand() % 100));
 	}
-	*/
+	
 }
 
 void Area::printAllActors()
@@ -106,12 +101,13 @@ std::vector<Actor*> Area::getAllActors()
 void Area::act()
 {
 	// print all actors
-	printAllActors();
-	std::cout << "------------------------------------------" << std::endl;
+	/*printAllActors();
+	std::cout << "------------------------------------------" << std::endl;*/
 
 	// set hasEaten and hasMoved to false for all animals
 	std::for_each(actors_.begin(), actors_.end(), [](Actor* a)
 	{
+		a->incAge();
 		if (myHelper::IsType<Animal, Actor>(a))
 		{
 			static_cast<Animal*>(a)->setHasEaten(false);
@@ -146,12 +142,12 @@ void Area::act()
 			}
 			else
 			{
-				// erase the herbivore from the vector
-				herb = actors_.erase(herb);
 				// update hunger and hasEaten
 				static_cast<Carnivore*>(*it)->eat();
+				// erase the herbivore from the vector
+				herb = actors_.erase(herb);
 				// update iterator
-				if (it < herb)
+				if (it < herb && it != actors_.end())
 				{
 					it++;
 				}
@@ -181,12 +177,12 @@ void Area::act()
 			}
 			else
 			{
-				// erase the herbivore from the vector
-				plant = actors_.erase(plant);
 				// update hunger and hasEaten
 				static_cast<Herbivore*>(*it)->eat();
+				// erase the herbivore from the vector
+				plant = actors_.erase(plant);
 				// update iterator
-				if (it < plant)
+				if (it < plant && it != actors_.end())
 				{
 					it++;
 				}
@@ -200,9 +196,8 @@ void Area::act()
 	}
 	
 	// generate new actors and print all actors
-	//generateRandomActors();
-	printAllActors();
-	std::cout << "------------------------------------------" << std::endl;
+	/*printAllActors();
+	std::cout << "------------------------------------------" << std::endl;*/
 
 }
 

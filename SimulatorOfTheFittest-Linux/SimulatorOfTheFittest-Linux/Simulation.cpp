@@ -27,7 +27,6 @@ struct EvStart : sc::event< EvStart > {};
 struct EvPauseRun : sc::event< EvPauseRun > {};
 struct EvSimulationFinished : sc::event< EvSimulationFinished > {};
 struct EvCancel : sc::event< EvCancel > {};
-struct EvReset : sc::event< EvReset >{};
 
 struct SimulatorSetup;
 struct Running;
@@ -51,8 +50,7 @@ struct SimulatorSetup : sc::simple_state < SimulatorSetup, Simulator >
 
 struct Running : sc::simple_state < Running, Simulator>
 {
-	typedef mpl::list < sc::transition< EvCancel, Canceled>,
-						sc::transition< EvSimulationFinished, Finished>,
+	typedef mpl::list <	sc::transition< EvSimulationFinished, Finished>,
 						sc::transition< EvPauseRun, Paused> > reactions;
 
 	Running()
@@ -63,8 +61,6 @@ struct Running : sc::simple_state < Running, Simulator>
 
 struct Canceled : sc::simple_state < Canceled, Simulator >
 {
-	typedef sc::transition< EvReset, SimulatorSetup > reactions;
-
 	Canceled()
 	{
 		std::cout << "Canceled" << std::endl;
@@ -74,7 +70,7 @@ struct Canceled : sc::simple_state < Canceled, Simulator >
 struct Paused : sc::simple_state < Paused, Simulator >
 {
 	typedef mpl::list < sc::transition< EvPauseRun, Running >,
-		sc::transition< EvReset, SimulatorSetup > > reactions;
+						sc::transition< EvCancel, Canceled > > reactions;
 
 	Paused()
 	{
@@ -84,8 +80,6 @@ struct Paused : sc::simple_state < Paused, Simulator >
 
 struct Finished : sc::simple_state < Finished, Simulator >
 {
-	typedef sc::transition< EvReset, SimulatorSetup > reactions;
-
 	Finished()
 	{
 		std::cout << "Finished" << std::endl;

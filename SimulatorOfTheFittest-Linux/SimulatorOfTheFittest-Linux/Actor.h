@@ -16,6 +16,10 @@ public:
 	{
 		age_++;
 	}
+	virtual int getAge()
+	{
+		return age_;
+	}
 };
 
 #endif

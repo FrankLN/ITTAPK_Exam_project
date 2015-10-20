@@ -13,6 +13,7 @@ public:
 	virtual ~WorldMapHolder() {};
 	virtual void printAll() = 0;
 	virtual void actAll() = 0;
+	virtual std::vector<Actor*> getAllActors() = 0;
 };
 
 template<typename T, size_t X, size_t Y = X>
@@ -65,6 +66,7 @@ public:
 				area->act();
 			}
 		}
+		moveAll();
 	}
 
 	void moveAll()
@@ -73,8 +75,6 @@ public:
 		{
 			for (auto area = row->begin(); area != row->end(); area++)
 			{
-				area->printAllActors();
-				std::cout << "------------------------------------------" << std::endl;
 
 				// get actor array from current area
 				std::vector<Actor*>* actors = area->getActors();
@@ -122,11 +122,11 @@ public:
 						// increment iterator
 						it++;
 					}
+
+
 				}
 
-				area->printAllActors();
-				std::cout << "------------------------------------------" << std::endl;
-
+				area->generateRandomActors();
 			}
 		}
 	}
