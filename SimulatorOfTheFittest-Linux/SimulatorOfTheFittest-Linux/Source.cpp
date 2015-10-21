@@ -91,6 +91,9 @@ int main()
 void setupMap(int& x, int& y)
 {
 	std::string input;
+	std::cout << "Size of map" << std::endl;
+	std::cout << "Valid inputs: 'number' fx 3 or" << std::endl;
+	std::cout << "              'number number' fx 4 5" << std::endl;
 	std::cout << "Please insert size of map: ";
 	std::getline(std::cin, input);
 
