@@ -13,45 +13,15 @@ protected:
 	bool hasEaten_;
 	int hungerBar_;
 public:
-	/*Animal(Animal&&	other)
+	virtual bool eat()
 	{
-		hasMoved_ = other.hasMoved_;
-		hasEaten_ = other.hasEaten_;
-		hungerBar_ = other.hungerBar_;
-		other.hasMoved_ = nullptr;
-		other.hasEaten_ = nullptr;
-		other.hungerBar_ = nullptr;
-	}
-	Movable&	operator=(Movable&&	other)
-	{
-		if (this != &other) {
-			delete data_;
-			data_ = nullptr;
-			std::swap(other.data_, data_);
+		if (hungerBar_ > 0)
+		{
+			hungerBar_--;
+			hasEaten_ = true;
+			return true;
 		}
-		return	*this;
-	}*/
-
-	/*template<typename T>
-	void eat(Actor* actor)
-	{ 
-		std::string result = "someting";
-		if (myHelper::IsType<T, Actor>(actor))
-			result = "a " + std::string(typeid(T).name()).substr(1);
-		//else if (myHelper::IsType<Herbivore, Actor>(actor))
-			//result = "Herbivore";
-		//else if (myHelper::IsType<Carnivore, Actor>(actor))
-			//result = "Carnivore";
-
-		//std::cout << "I ate " << result << " and i liked it" << std::endl;
-		hungerBar_--;
-		hasEaten_ = true;
-	}*/
-
-	virtual void eat()
-	{
-		hungerBar_--;
-		hasEaten_ = true;
+		return false;
 	}
 	
 	virtual void setHasEaten(bool c)

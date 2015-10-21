@@ -38,12 +38,12 @@ Area::Area()
 
 Area::~Area()
 {
-	/*for (auto it = actors_.begin(); it != actors_.end(); it++)
+	for (auto it = actors_.begin(); it != actors_.end(); it++)
 	{
 		delete (*it);
 	}
 
-	actors_.clear();*/
+	actors_.clear();
 }
 
 std::string Area::getName() const
@@ -63,21 +63,18 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-
-	
 	while (rand() % 100 < chance)
 	{
-		actors_.push_back(new Plant(rand() % 100));
+		actors_.push_back(new Plant());
 	}
 	while (rand() % 100 < chance)
 	{
-		actors_.push_back(new Carnivore(950 + rand() % 100));
+		actors_.push_back(new Carnivore());
 	}
-	while (rand() % 100 < chance)
+	while (rand() % 100 < chance*5)
 	{
-		actors_.push_back(new Herbivore(950 + rand() % 100));
+		actors_.push_back(new Herbivore());
 	}
-	
 }
 
 void Area::printAllActors()
@@ -143,14 +140,21 @@ void Area::act()
 			else
 			{
 				// update hunger and hasEaten
-				static_cast<Carnivore*>(*it)->eat();
-				// erase the herbivore from the vector
-				herb = actors_.erase(herb);
-				// update iterator
-				if (it < herb && it != actors_.end())
+				if (static_cast<Carnivore*>(*it)->eat())
+				{
+					// erase the herbivore from the vector
+					herb = actors_.erase(herb);
+					// update iterator
+					if (it < herb && it != actors_.end())
+					{
+						it++;
+					}
+				}
+				else
 				{
 					it++;
 				}
+				
 			}
 		}
 		else if (myHelper::IsType<Herbivore, Actor>(*it))
@@ -178,14 +182,22 @@ void Area::act()
 			else
 			{
 				// update hunger and hasEaten
-				static_cast<Herbivore*>(*it)->eat();
-				// erase the herbivore from the vector
-				plant = actors_.erase(plant);
-				// update iterator
-				if (it < plant && it != actors_.end())
+				if (static_cast<Herbivore*>(*it)->eat())
+				{
+					// erase the herbivore from the vector
+					plant = actors_.erase(plant);
+
+					// update iterator
+					if (it < plant && it != actors_.end())
+					{
+						it++;
+					}
+				}
+				else
 				{
 					it++;
 				}
+				
 			}
 		}
 		else if (myHelper::IsType<Plant, Actor>(*it))

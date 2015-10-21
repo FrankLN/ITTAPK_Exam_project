@@ -5,9 +5,9 @@
 
 #VisualGDB: AutoSourceFiles		#<--- remove this line to disable auto-updating of SOURCEFILES and EXTERNAL_LIBS
 
-TARGETNAME := SimulatorOfTheFittest-Linux.so
+TARGETNAME := SimulatorOfTheFittest-Linux.
 #TARGETTYPE can be APP, STATIC or SHARED
-TARGETTYPE := SHARED
+TARGETTYPE := APP
 
 to_lowercase = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$(subst F,f,$(subst G,g,$(subst H,h,$(subst I,i,$(subst J,j,$(subst K,k,$(subst L,l,$(subst M,m,$(subst N,n,$(subst O,o,$(subst P,p,$(subst Q,q,$(subst R,r,$(subst S,s,$(subst T,t,$(subst U,u,$(subst V,v,$(subst W,w,$(subst X,x,$(subst Y,y,$(subst Z,z,$1))))))))))))))))))))))))))
 
@@ -35,19 +35,7 @@ error:
 	$(error Invalid configuration, please check your inputs)
 endif
 
-<<<<<<< HEAD
-SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Plant.cpp Simulation.cpp Source.cpp
-=======
-<<<<<<< HEAD
-<<<<<<< 0b071b1a946db9f2b2f00224cb0501d39077935c
-SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Plant.cpp Simulation.cpp Source.cpp Start.cpp
-=======
-SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Plant.cpp Simulation.cpp Source.cpp
->>>>>>> testin stuff
-=======
-SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Plant.cpp Simulation.cpp Source.cpp
->>>>>>> 2cf2e141794e9d59d911cae2658cf6246c2c3629
->>>>>>> phl
+SOURCEFILES := Area.cpp Carnivore.cpp Herbivore.cpp Log.cpp Plant.cpp Simulation.cpp Source.cpp
 EXTERNAL_LIBS := 
 EXTERNAL_LIBS_COPIED := $(foreach lib, $(EXTERNAL_LIBS),$(BINARYDIR)/$(notdir $(lib)))
 

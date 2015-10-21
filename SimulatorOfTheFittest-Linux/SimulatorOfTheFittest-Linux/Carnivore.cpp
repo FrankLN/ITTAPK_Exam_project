@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "Carnivore.h"
 
-Carnivore::Carnivore(float mass)
+Carnivore::Carnivore()
 {
 	hungerBar_ = 5;
 	//name_ = typeid(this).name();

@@ -1,6 +1,6 @@
 #include "Plant.h"
 
-Plant::Plant(float mass)
+Plant::Plant()
 {
 	age_ = 0;
 }

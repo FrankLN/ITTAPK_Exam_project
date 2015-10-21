@@ -9,7 +9,7 @@
 class Herbivore : public Animal
 {
 public:
-	Herbivore(float);
+	Herbivore();
 	~Herbivore();
 
 	void show();

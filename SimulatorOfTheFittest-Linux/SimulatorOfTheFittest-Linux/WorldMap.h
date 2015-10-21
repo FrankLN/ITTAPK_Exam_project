@@ -10,7 +10,7 @@
 class WorldMapHolder
 {
 public:
-	virtual ~WorldMapHolder() {};
+	virtual ~WorldMapHolder() = default;
 	virtual void printAll() = 0;
 	virtual void actAll() = 0;
 	virtual std::vector<Actor*> getAllActors() = 0;

@@ -67,7 +67,6 @@
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="Carnivore.cpp" />
     <ClCompile Include="Herbivore.cpp" />
-    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -79,13 +78,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="ActorList.h" />
-    <ClInclude Include="ActorTypeList.h" />
     <ClInclude Include="Animal.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="Carnivore.h" />
     <ClInclude Include="Herbivore.h" />
-    <ClInclude Include="Log.h" />
     <ClInclude Include="Plant.h" />
     <ClInclude Include="SharedHelperFunctions.h" />
     <ClInclude Include="WorldMap.h" />

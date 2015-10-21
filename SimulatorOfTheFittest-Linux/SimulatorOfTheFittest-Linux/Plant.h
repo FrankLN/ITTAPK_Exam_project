@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <typeinfo>
-#include <boost/signals2.hpp>
 #include <vector>
 
 #include "Actor.h"
@@ -11,11 +10,10 @@
 class Plant : public Actor
 {
 public:
-	Plant(float mass);
+	Plant();
 	~Plant();
 	void show();
 	std::string showToString();
-	boost::signals2::signal<Actor* (Actor*)> Sig;
 };
 
 #endif

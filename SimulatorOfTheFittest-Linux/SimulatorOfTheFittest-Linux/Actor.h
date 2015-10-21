@@ -9,7 +9,7 @@ class Actor
 protected:
 	int age_;
 public:
-	virtual ~Actor(){};
+	virtual ~Actor() = default;
 	virtual void show() = 0;
 	virtual std::string showToString() = 0;
 	virtual void incAge()

@@ -21,6 +21,7 @@ int setResultRender();
 
 int main()
 {
+
 	boost::signals2::signal<void(std::vector<Actor*>)> sig1;
 	WorldMapHolder* wm;
 	Simulator mySimulator;
@@ -80,6 +81,8 @@ int main()
 		}
 		finish = true;
 	}
+
+	delete wm;
 
 	return 0;
 }

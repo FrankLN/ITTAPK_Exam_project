@@ -1,6 +1,6 @@
 #include "Herbivore.h"
 
-Herbivore::Herbivore(float mass)
+Herbivore::Herbivore()
 {
 	hungerBar_ = 5;
 	//name_ = typeid(this).name();
