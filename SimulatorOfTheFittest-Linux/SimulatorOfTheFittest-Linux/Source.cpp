@@ -1,15 +1,18 @@
+#include <iostream>
+#include <vector>
+#include <stdio.h>
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <boost/signals2.hpp>
+
 #include "Carnivore.h"
 #include "Plant.h"
 #include "Herbivore.h"
-#include <iostream>
-#include <vector>
 #include "WorldMap.h"
 #include "Area.h"
 #include "Simulation.cpp"
-#include <boost/signals2.hpp>
 #include "SharedHelperFunctions.h"
-
-void start();
 
 void setupMap(int&, int&);
 int getNumberOfRuns();
@@ -20,7 +23,6 @@ int setResultRender();
 
 int main()
 {
-
 	boost::signals2::signal<void(std::vector<Actor*>)> sig1;
 	WorldMapHolder* wm;
 	Simulator mySimulator;
@@ -95,7 +97,7 @@ void setupMap(int& x, int& y)
 	size_t last = input.find_last_of(" ");
 	size_t first = input.find(" ");
 	
-	if (last == first && input.find_first_not_of("0123456789 ") == std::string::npos)
+	if (last == first && input != "" && input.find_first_not_of("0123456789 ") == std::string::npos)
 	{
 		if (first == std::string::npos)
 		{
@@ -122,7 +124,7 @@ int getNumberOfRuns()
 	std::string input;
 	std::cin >> input;
 	
-	if (!input.find_first_not_of("0123456789"))
+	if (!input.find_first_not_of("0123456789") || input == "")
 	{
 		std::cout << "Only input numbers!" << std::endl;
 		return getNumberOfRuns();
@@ -132,12 +134,40 @@ int getNumberOfRuns()
 	return result;
 }
 
+// Funktionen kbhit(void) er fundet her http://stackoverflow.com/a/7105749
+int kbhit(void)
+{
+	struct termios oldt, newt;
+	int ch;
+	int oldf;
+
+	tcgetattr(STDIN_FILENO, &oldt);
+	newt = oldt;
+	newt.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+	ch = getchar();
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+	fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+	if (ch != EOF)
+	{
+		ungetc(ch, stdin);
+		return 1;
+	}
+
+	return 0;
+}
+
 bool run(int& i, int& n, WorldMapHolder* wmP)
 {
 	std::string tmp;
-	while (myHelpers::kbhit<Actor>())
+	while (kbhit())
 		std::getline(std::cin, tmp);
-	while(i < n && !myHelpers::kbhit<Actor>())
+	while(i < n && !kbhit())
 	{
 		wmP->actAll();
 		i++;
@@ -156,7 +186,7 @@ int breakMenu()
 	std::string input;
 	std::cin >> input;
 
-	if (!input.find_first_not_of("0123456789"))
+	if (!input.find_first_not_of("0123456789") || input == "")
 	{
 		std::cout << "Only input numbers!" << std::endl;
 		return breakMenu();
@@ -182,10 +212,10 @@ int setResultRender()
 	std::string input;
 	std::cin >> input;
 
-	if (!input.find_first_not_of("0123456789"))
+	if (!input.find_first_not_of("0123456789") || input == "")
 	{
 		std::cout << "Only input numbers!" << std::endl;
-		return breakMenu();
+		return setResultRender();
 	}
 
 	int result = std::stoi(input);
@@ -196,86 +226,3 @@ int setResultRender()
 	}
 	return result;
 }
-
-//void start()
-//{
-//	Simulator mySimulator;
-//	bool finish = false;
-//	bool quit = false;
-//	bool reset = false;
-//
-//
-//
-//	while (!finish && !quit)
-//	{
-//		finish = true;
-//		for(int i = 0; i < 20 ; i++) std::cout << std::endl;
-//		std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-//		std::cout << "<=----------------Main menu--------------=>" << std::endl;
-//		std::cout << "<=-----------------1. Start--------------=>" << std::endl;
-//		std::cout << "<=-----------------2. Quit---------------=>" << std::endl;
-//		std::cout << "<=--Select option: ";
-//
-//
-//		int option;
-//		std::cin >> option;
-//		std::string str;
-//		std::getline(std::cin, str);
-//
-//		switch (option)
-//		{
-//		case 1:
-//			for (int i = 0; i < 20; i++) std::cout << std::endl;
-//			mySimulator.initiate();
-//
-//			for (int i = 0; i < 20; i++) std::cout << std::endl;
-//			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-//			mySimulator.process_event(EvStart());
-//			break;
-//		case 2:
-//			quit = true;
-//			break;
-//		default:
-//			finish = false;
-//		}
-//	}
-//
-//	while (!quit && !reset)
-//	{
-//		std::cout << "<=-----------------1. Quit---------------=>" << std::endl;
-//		std::cout << "<=-----------------2. Pause/Resume-------=>" << std::endl;
-//		std::cout << "<=-----------------3. Reset--------------=>" << std::endl;
-//		std::cout << "<=-----------------4. Toggle log---------=>" << std::endl;
-//		std::cout << "<=--Select option: ";
-//
-//		int option;
-//		std::cin >> option;
-//		std::string str;
-//		std::getline(std::cin, str);
-//
-//		switch (option)
-//		{
-//		case 1:
-//			quit = true;
-//			break;
-//		case 2:
-//			for (int i = 0; i < 20; i++) std::cout << std::endl;
-//			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-//			mySimulator.process_event(EvPauseRun());
-//			break;
-//		case 3:
-//			reset = true;
-//			break;
-//		case 4:
-//			for (int i = 0; i < 20; i++) std::cout << std::endl;
-//			std::cout << "<=--------Simulator of the fittest-------=>" << std::endl;
-//			mySimulator.process_event(EvLogOnOff());
-//			break;
-//
-//		}
-//	}
-//
-//
-//	if (reset)
-//		start();
-//}

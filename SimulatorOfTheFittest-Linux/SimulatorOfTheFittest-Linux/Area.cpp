@@ -151,6 +151,7 @@ void Area::act()
 				// update hunger and hasEaten
 				if (static_cast<Carnivore*>(*it)->eat())
 				{
+					delete *herb;
 					// erase the herbivore from the vector
 					herb = actors_.erase(herb);
 					// update iterator
@@ -193,6 +194,7 @@ void Area::act()
 				// update hunger and hasEaten
 				if (static_cast<Herbivore*>(*it)->eat())
 				{
+					delete *plant;
 					// erase the herbivore from the vector
 					plant = actors_.erase(plant);
 
