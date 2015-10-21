@@ -6,6 +6,7 @@
 #include <vector>
 #include <typeinfo>
 #include "Area.h"
+#include "SharedHelperFunctions.h"
 
 class WorldMapHolder
 {

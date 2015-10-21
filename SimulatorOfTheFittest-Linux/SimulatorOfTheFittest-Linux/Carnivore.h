@@ -2,10 +2,7 @@
 #define CARNIVORE_H
 
 #include <iostream>
-#include <typeinfo>
 #include <string>
-#include <vector>
-
 #include "Animal.h"
 
 class Carnivore : public Animal

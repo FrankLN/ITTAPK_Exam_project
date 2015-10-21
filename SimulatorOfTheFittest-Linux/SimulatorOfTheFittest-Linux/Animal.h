@@ -2,9 +2,7 @@
 #define ANIMAL_H
 
 #include <iostream>
-#include <vector>
 #include "Actor.h"
-#include "SharedHelperFunctions.h"
 
 class Animal : public Actor
 {
