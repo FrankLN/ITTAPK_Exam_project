@@ -74,6 +74,7 @@ namespace myHelper
 
 namespace myHelpers
 {
+	// Funktionen kbhit(void) er fundet her http://stackoverflow.com/a/7105749
 	template<typename T>
 	int kbhit(void)
 	{
