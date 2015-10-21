@@ -1,7 +1,6 @@
 #include "Carnivore.h"
 #include "Plant.h"
 #include "Herbivore.h"
-#include <exception>
 #include <iostream>
 #include <vector>
 #include "WorldMap.h"

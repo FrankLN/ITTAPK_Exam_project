@@ -6,19 +6,7 @@
 #include <boost/mpl/list.hpp>
 #include <boost/algorithm/string.hpp>
 
-
-
 #include <iostream>
-#include <string>
-#include <cstddef>
-
-#include "Animal.h"
-#include "Carnivore.h"
-#include "WorldMap.h"
-#include "Area.h"
-#include "SharedHelperFunctions.h"
-
-#define NUM_THREADS 5
 
 namespace sc = boost::statechart;
 namespace mpl = boost::mpl;

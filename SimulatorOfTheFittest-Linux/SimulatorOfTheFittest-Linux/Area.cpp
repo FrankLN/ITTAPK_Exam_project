@@ -1,5 +1,4 @@
 #include <random>
-#include <boost/smart_ptr.hpp>
 
 #include "Area.h"
 #include "SharedHelperFunctions.h"
@@ -63,17 +62,27 @@ int Area::getRandomNumber() const
 
 void Area::generateRandomActors()
 {
-	while (rand() % 100 < chance)
+	try
 	{
-		actors_.push_back(new Plant());
+		while (rand() % 100 < chance)
+		{
+			actors_.reserve(actors_.size() * 10);
+			actors_.push_back(new Plant());
+		}
+		while (rand() % 100 < chance)
+		{
+			actors_.reserve(actors_.size() * 10);
+			actors_.push_back(new Carnivore());
+		}
+		while (rand() % 100 < chance)
+		{
+			actors_.reserve(actors_.size() * 10);
+			actors_.push_back(new Herbivore());
+		}
 	}
-	while (rand() % 100 < chance)
+	catch (int e)
 	{
-		actors_.push_back(new Carnivore());
-	}
-	while (rand() % 100 < chance*5)
-	{
-		actors_.push_back(new Herbivore());
+		std::cout << e << std::endl;
 	}
 }
 

@@ -288,7 +288,6 @@ struct GetWorldMap
 		else if (p1 == 100 && p2 == 100) return new WorldMap<Area, 100, 100>();
 
 		// Insert custom map sizes here
-
 		
 		else
 		{
